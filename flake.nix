@@ -14,6 +14,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    cvc4_src_1_8 = {
+      url = "github:cvc4/cvc4/1.8";
+      flake = false;
+    };
+    cvc4_src_1_7 = {
+      url = "github:cvc4/cvc4/1.7";
+      flake = false;
+    };
     yices_src_2_5_4 = {
       url = "github:SRI-CSL/yices2/Yices-2.5.4";
       flake = false;
@@ -68,16 +76,14 @@
     inps.flake-utils.lib.eachDefaultSystem (system:
       let pkgs = inps.nixpkgs.legacyPackages.${system};
           cleanVer = builtins.replaceStrings ["."] ["_"];
-          mkZ3 = version:
-            pkgs.z3.overrideAttrs (_: {
+          mkVerPkg = pkg: version:
+            pkgs.${pkg}.overrideAttrs  (_: {
               inherit version;
-              src = inps."${"z3_src_" + cleanVer version}";
+              src = inps."${pkg + "_src_" + cleanVer version}";
             });
-          mkYices = version:
-            pkgs.yices.overrideAttrs (_: {
-              inherit version;
-              src = inps."${"yices_src_" + cleanVer version}";
-            });
+          mkCVC4 = mkVerPkg "cvc4";
+          mkYices = mkVerPkg "yices";
+          mkZ3 = mkVerPkg "z3";
       in
       {
         packages = rec {
@@ -98,6 +104,12 @@
             v2_6_1 = mkYices "2.6.1";
             v2_5_4 = mkYices "2.5.4";
             v2_5   = mkYices "2.5.4";
+          };
+          cvc4 = pkgs.cvc4 // { # whatever the nixpkgs current version is...
+            v1_8   = mkCVC4 "1.8";
+            v1_7   = mkCVC4 "1.7";
+            v4_1_8   = mkCVC4 "1.8";
+            v4_1_7   = mkCVC4 "1.7";
           };
         };
       });
