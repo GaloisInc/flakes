@@ -12,7 +12,7 @@
   #   $ nix run github:GaloisInc/flakes#z3.v4_8_14 -- -version
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/21.11";
     flake-utils.url = "github:numtide/flake-utils";
     cvc4_src_1_8 = {
       url = "github:cvc4/cvc4/1.8";
