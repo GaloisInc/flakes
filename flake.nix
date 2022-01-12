@@ -14,6 +14,26 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    yices_src_2_5_4 = {
+      url = "github:SRI-CSL/yices2/Yices-2.5.4";
+      flake = false;
+    };
+    yices_src_2_6_1 = {
+      url = "github:SRI-CSL/yices2/Yices-2.6.1";
+      flake = false;
+    };
+    yices_src_2_6_2 = {
+      url = "github:SRI-CSL/yices2/Yices-2.6.2";
+      flake = false;
+    };
+    yices_src_2_6_3 = {
+      url = "github:SRI-CSL/yices2/Yices-2.6.3";
+      flake = false;
+    };
+    yices_src_2_6_4 = {
+      url = "github:SRI-CSL/yices2/Yices-2.6.4";
+      flake = false;
+    };
     z3_src_4_8_8 = {
       url = "github:z3prover/z3/z3-4.8.8";
       flake = false;
@@ -44,21 +64,19 @@
     };
   };
 
-  outputs = inps@{ self, flake-utils, nixpkgs
-                 , z3_src_4_8_8
-                 , z3_src_4_8_9
-                 , z3_src_4_8_10
-                 , z3_src_4_8_11
-                 , z3_src_4_8_12
-                 , z3_src_4_8_13
-                 , z3_src_4_8_14
-                 }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+  outputs = inps:
+    inps.flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = inps.nixpkgs.legacyPackages.${system};
+          cleanVer = builtins.replaceStrings ["."] ["_"];
           mkZ3 = version:
             pkgs.z3.overrideAttrs (_: {
               inherit version;
-              src = inps."${"z3_src_" + builtins.replaceStrings ["."] ["_"] version}";
+              src = inps."${"z3_src_" + cleanVer version}";
+            });
+          mkYices = version:
+            pkgs.yices.overrideAttrs (_: {
+              inherit version;
+              src = inps."${"yices_src_" + cleanVer version}";
             });
       in
       {
@@ -71,6 +89,15 @@
             v4_8_12 = mkZ3 "4.8.12";
             v4_8_13 = mkZ3 "4.8.13";
             v4_8_14 = mkZ3 "4.8.14";
+          };
+          yices = pkgs.yices // { # whatever the nixpkgs current version is...
+            v2_6   = mkYices "2.6.4";
+            v2_6_4 = mkYices "2.6.4";
+            v2_6_3 = mkYices "2.6.3";
+            v2_6_2 = mkYices "2.6.2";
+            v2_6_1 = mkYices "2.6.1";
+            v2_5_4 = mkYices "2.5.4";
+            v2_5   = mkYices "2.5.4";
           };
         };
       });
