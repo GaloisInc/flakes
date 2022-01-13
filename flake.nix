@@ -14,6 +14,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/21.11";
     flake-utils.url = "github:numtide/flake-utils";
+    abc_src_2020_06_22 = {
+      url = "github:berkeley-abc/abc/341db2566";
+      flake = false;
+    };
+    abc_src_2021_12_30 = {
+      url = "github:berkeley-abc/abc/48498af";
+      flake = false;
+    };
     boolector_src_3_2_2 = {
       url = "github:boolector/boolector/3.2.2";
       flake = false;
@@ -113,6 +121,12 @@
               inherit version;
               src = inps."${pkg + "_src_" + cleanVer version}";
             });
+          mkABC = version:
+            pkgs.abc-verifier.overrideAttrs (_: {
+              name = "abc";
+              inherit version;
+              src = inps."${"abc_src_" + version}";
+            });
           mkBoolector = mkVerPkg "boolector";
           mkCVC4 = mkVerPkg "cvc4";
           mkYices = mkVerPkg "yices";
@@ -160,6 +174,10 @@
             v3_2_1   = mkBoolector "3.2.1";
             v3_2_0   = mkBoolector "3.2.0";
             v3_1_0   = mkBoolector "3.1.0";
+          };
+          abc = pkgs.abc-verifier // {
+            v2020_06_22 = mkABC "2020_06_22";
+            v2021_12_30 = mkABC "2021_12_30";
           };
         };
       });
