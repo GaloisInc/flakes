@@ -14,6 +14,22 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/21.11";
     flake-utils.url = "github:numtide/flake-utils";
+    boolector_src_3_2_2 = {
+      url = "github:boolector/boolector/3.2.2";
+      flake = false;
+    };
+    boolector_src_3_2_1 = {
+      url = "github:boolector/boolector/3.2.1";
+      flake = false;
+    };
+    boolector_src_3_2_0 = {
+      url = "github:boolector/boolector/3.2.0";
+      flake = false;
+    };
+    boolector_src_3_1_0 = {
+      url = "github:boolector/boolector/3.1.0";
+      flake = false;
+    };
     cvc4_src_1_8 = {
       url = "github:cvc4/cvc4/1.8";
       flake = false;
@@ -97,6 +113,7 @@
               inherit version;
               src = inps."${pkg + "_src_" + cleanVer version}";
             });
+          mkBoolector = mkVerPkg "boolector";
           mkCVC4 = mkVerPkg "cvc4";
           mkYices = mkVerPkg "yices";
           mkZ3 = mkVerPkg "z3";
@@ -135,6 +152,14 @@
             v1_7   = mkCVC4 "1.7";
             v4_1_8   = mkCVC4 "1.8";
             v4_1_7   = mkCVC4 "1.7";
+          };
+          boolector = pkgs.boolector // { # whatever the nixpkgs current version is...
+            v3_2   = mkBoolector "3.2.2";
+            v3_1   = mkBoolector "3.1.0";
+            v3_2_2   = mkBoolector "3.2.2";
+            v3_2_1   = mkBoolector "3.2.1";
+            v3_2_0   = mkBoolector "3.2.0";
+            v3_1_0   = mkBoolector "3.1.0";
           };
         };
       });
