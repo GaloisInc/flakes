@@ -95,7 +95,7 @@
       flake = false;
     };
     z3_src_4_8_11 = {
-      url = "github:z3prover/z3/z3-4.8.10";
+      url = "github:z3prover/z3/z3-4.8.11";
       flake = false;
     };
     z3_src_4_8_12 = {
