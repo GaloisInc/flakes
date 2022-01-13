@@ -22,6 +22,22 @@
       url = "github:cvc4/cvc4/1.7";
       flake = false;
     };
+    stp_src_2_3_3 = {
+      url = "github:stp/stp/2.3.3";
+      flake = false;
+    };
+    stp_src_2_3_2 = {
+      url = "github:stp/stp/2.3.2";
+      flake = false;
+    };
+    stp_src_2_3_1 = {
+      url = "github:stp/stp/2.3.1";
+      flake = false;
+    };
+    stp_src_2_2_0 = {
+      url = "github:stp/stp/stp-2.2.0";
+      flake = false;
+    };
     yices_src_2_5_4 = {
       url = "github:SRI-CSL/yices2/Yices-2.5.4";
       flake = false;
@@ -84,6 +100,7 @@
           mkCVC4 = mkVerPkg "cvc4";
           mkYices = mkVerPkg "yices";
           mkZ3 = mkVerPkg "z3";
+          mkSTP = mkVerPkg "stp";
       in
       {
         packages = rec {
@@ -104,6 +121,14 @@
             v2_6_1 = mkYices "2.6.1";
             v2_5_4 = mkYices "2.5.4";
             v2_5   = mkYices "2.5.4";
+          };
+          stp = pkgs.stp // { # whatever the nixpkgs current version is...
+            v2_3   = mkSTP "2.3.3";
+            v2_2   = mkSTP "2.2.0";
+            v2_3_3   = mkSTP "2.3.3";
+            v2_3_2   = mkSTP "2.3.2";
+            v2_3_1   = mkSTP "2.3.1";
+            v2_2_0   = mkSTP "2.2.0";
           };
           cvc4 = pkgs.cvc4 // { # whatever the nixpkgs current version is...
             v1_8   = mkCVC4 "1.8";
