@@ -71,6 +71,10 @@
         "cvc4_src_1_8": "cvc4_src_1_8",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
+        "stp_src_2_2_0": "stp_src_2_2_0",
+        "stp_src_2_3_1": "stp_src_2_3_1",
+        "stp_src_2_3_2": "stp_src_2_3_2",
+        "stp_src_2_3_3": "stp_src_2_3_3",
         "yices_src_2_5_4": "yices_src_2_5_4",
         "yices_src_2_6_1": "yices_src_2_6_1",
         "yices_src_2_6_2": "yices_src_2_6_2",
@@ -83,6 +87,74 @@
         "z3_src_4_8_14": "z3_src_4_8_14",
         "z3_src_4_8_8": "z3_src_4_8_8",
         "z3_src_4_8_9": "z3_src_4_8_9"
+      }
+    },
+    "stp_src_2_2_0": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1469138502,
+        "narHash": "sha256-icQhn2S397TLYHhnCQnAz6q1RvHiHUK6w9YKUyUfAso=",
+        "owner": "stp",
+        "repo": "stp",
+        "rev": "9b9021b28bf95c3851835e0c836a05cb5baa4670",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stp",
+        "ref": "stp-2.2.0",
+        "repo": "stp",
+        "type": "github"
+      }
+    },
+    "stp_src_2_3_1": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1507495326,
+        "narHash": "sha256-M/R+zIDwir4VWF+C0AST30K8D2YoBFQQGSjTyR6kCdw=",
+        "owner": "stp",
+        "repo": "stp",
+        "rev": "15943d7fa821106c350a367d83aaf143d4720023",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stp",
+        "ref": "2.3.1",
+        "repo": "stp",
+        "type": "github"
+      }
+    },
+    "stp_src_2_3_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1550704354,
+        "narHash": "sha256-cy8WgXltTGmlUdmqxQdd5RCoiF1PkwKixQIisQgcPp8=",
+        "owner": "stp",
+        "repo": "stp",
+        "rev": "a58a4ab2f42a334854c7e7485593e33cd4b4ee53",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stp",
+        "ref": "2.3.2",
+        "repo": "stp",
+        "type": "github"
+      }
+    },
+    "stp_src_2_3_3": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1551536761,
+        "narHash": "sha256-B+HQF4TJPkYrpodE4qo4JHvlu+a5HTJf1AFyXTnZ4vk=",
+        "owner": "stp",
+        "repo": "stp",
+        "rev": "7a3fd493ae6f0a524f853946308f4f3c3ddcbe76",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stp",
+        "ref": "2.3.3",
+        "repo": "stp",
+        "type": "github"
       }
     },
     "yices_src_2_5_4": {
