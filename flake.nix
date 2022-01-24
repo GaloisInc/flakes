@@ -22,6 +22,10 @@
       url = "github:berkeley-abc/abc/48498af";
       flake = false;
     };
+    bitwuzla_unstable_2021_07_01 = {
+      url = "github:bitwuzla/bitwuzla/58d720598e359b1fdfec4a469c76f1d1f24db51a";
+      flake = false;
+    };
     boolector_src_3_2_2 = {
       url = "github:boolector/boolector/3.2.2";
       flake = false;
@@ -127,6 +131,7 @@
               inherit version;
               src = inps."${"abc_src_" + version}";
             });
+          mkBitwuzla = mkVerPkg "bitwuzla";
           mkBoolector = mkVerPkg "boolector";
           mkCVC4 = mkVerPkg "cvc4";
           mkYices = mkVerPkg "yices";
@@ -166,6 +171,9 @@
             v1_7   = mkCVC4 "1.7";
             v4_1_8   = mkCVC4 "1.8";
             v4_1_7   = mkCVC4 "1.7";
+          };
+          bitwuzla = pkgs.bitwuzla // { # whatever the nixpkgs current version is...
+            vunstable_2021_07_01 = mkBitwuzla "unstable-2021-07-01";
           };
           boolector = pkgs.boolector // { # whatever the nixpkgs current version is...
             v3_2   = mkBoolector "3.2.2";
