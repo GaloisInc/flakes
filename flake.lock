@@ -34,6 +34,23 @@
         "type": "github"
       }
     },
+    "bitwuzla_unstable_2021_07_01": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1625171294,
+        "narHash": "sha256-BPAa/SMxDzspQl+RaonMyq6N36o5mIBCWj36e5vG1Rs=",
+        "owner": "bitwuzla",
+        "repo": "bitwuzla",
+        "rev": "58d720598e359b1fdfec4a469c76f1d1f24db51a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bitwuzla",
+        "repo": "bitwuzla",
+        "rev": "58d720598e359b1fdfec4a469c76f1d1f24db51a",
+        "type": "github"
+      }
+    },
     "boolector_src_3_1_0": {
       "flake": false,
       "locked": {
@@ -171,6 +188,7 @@
       "inputs": {
         "abc_src_2020_06_22": "abc_src_2020_06_22",
         "abc_src_2021_12_30": "abc_src_2021_12_30",
+        "bitwuzla_unstable_2021_07_01": "bitwuzla_unstable_2021_07_01",
         "boolector_src_3_1_0": "boolector_src_3_1_0",
         "boolector_src_3_2_0": "boolector_src_3_2_0",
         "boolector_src_3_2_1": "boolector_src_3_2_1",
