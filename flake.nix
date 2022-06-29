@@ -50,6 +50,10 @@
       url = "github:cvc4/cvc4/1.7";
       flake = false;
     };
+    cvc5_src_1_0_0 = {
+      url = "github:cvc5/cvc5/cvc5-1.0.0";
+      flake = false;
+    };
     stp_src_2_3_3 = {
       url = "github:stp/stp/2.3.3";
       flake = false;
@@ -134,6 +138,7 @@
           mkBitwuzla = mkVerPkg "bitwuzla";
           mkBoolector = mkVerPkg "boolector";
           mkCVC4 = mkVerPkg "cvc4";
+          mkCVC5 = mkVerPkg "cvc5";
           mkYices = mkVerPkg "yices";
           mkZ3 = mkVerPkg "z3";
           mkSTP = mkVerPkg "stp";
@@ -171,6 +176,9 @@
             v1_7   = mkCVC4 "1.7";
             v4_1_8   = mkCVC4 "1.8";
             v4_1_7   = mkCVC4 "1.7";
+          };
+          cvc5 = pkgs.cvc5 // { # whatever the nixpkgs current version is...
+            v1_0_0  = mkCVC5 "1.0.0";
           };
           bitwuzla = pkgs.bitwuzla // { # whatever the nixpkgs current version is...
             vunstable_2021_07_01 = mkBitwuzla "unstable-2021-07-01";
