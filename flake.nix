@@ -12,7 +12,7 @@
   #   $ nix run github:GaloisInc/flakes#z3.v4_8_14 -- -version
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/21.11";
+    nixpkgs.url = "github:nixos/nixpkgs/22.05";
     flake-utils.url = "github:numtide/flake-utils";
     abc_src_2020_06_22 = {
       url = "github:berkeley-abc/abc/341db2566";
