@@ -137,7 +137,14 @@
             });
           mkBitwuzla = mkVerPkg "bitwuzla";
           mkBoolector = mkVerPkg "boolector";
-          mkCVC4 = mkVerPkg "cvc4";
+          mkCVC4 = version:
+            let basePkg = mkVerPkg "cvc4" version;
+            in basePkg.overrideAttrs (old: {
+              buildInputs = old.buildInputs ++ [ pkgs.symfpu ];
+              # Adding --symfpu to configureFlags is ineffective ?!
+              # configureFlags = old.configureFlags ++ [ "--symfpu" ];
+              cmakeFlags = old.cmakeFlags ++ [ "-DUSE_SYMFPU=ON" ];
+            });
           mkCVC5 = mkVerPkg "cvc5";
           mkYices = mkVerPkg "yices";
           mkZ3 = mkVerPkg "z3";
