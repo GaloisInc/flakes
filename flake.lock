@@ -187,6 +187,23 @@
         "type": "github"
       }
     },
+    "cvc5_src_1_0_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1661533863,
+        "narHash": "sha256-RDslPz9b0R9NXaXoixSCenHEh+F3wg/8p4Ksrzh41PI=",
+        "owner": "cvc5",
+        "repo": "cvc5",
+        "rev": "ef35c1131976e5a3d981dace510d90aed2d11cef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cvc5",
+        "ref": "cvc5-1.0.2",
+        "repo": "cvc5",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1638122382,
@@ -231,6 +248,7 @@
         "cvc4_src_1_8": "cvc4_src_1_8",
         "cvc5_src_1_0_0": "cvc5_src_1_0_0",
         "cvc5_src_1_0_1": "cvc5_src_1_0_1",
+        "cvc5_src_1_0_2": "cvc5_src_1_0_2",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "stp_src_2_2_0": "stp_src_2_2_0",
