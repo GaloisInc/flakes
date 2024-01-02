@@ -42,6 +42,10 @@
       url = "github:boolector/boolector/3.1.0";
       flake = false;
     };
+    build-bom-src = {
+      url = "github:travitch/build-bom";
+      flake = false;
+    };
     cvc4_src_1_8 = {
       url = "github:cvc4/cvc4/1.8";
       flake = false;
@@ -128,7 +132,7 @@
     };
   };
 
-  outputs = inps:
+  outputs = inps@{ self, ... }:
     inps.flake-utils.lib.eachDefaultSystem (system:
       let pkgs = inps.nixpkgs.legacyPackages.${system};
           cleanVer = builtins.replaceStrings ["."] ["_"];
@@ -211,6 +215,18 @@
           abc = pkgs.abc-verifier // {
             v2020_06_22 = mkABC "2020_06_22";
             v2021_12_30 = mkABC "2021_12_30";
+          };
+
+          # -------------------------------------------------
+
+          build-bom = import "${self}/build-bom" {
+            inherit pkgs;
+            src = inps.build-bom-src;
+          };
+          build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
+            inherit pkgs build-bom;
+            clang = pkgs.clang_14;
+            llvm = pkgs.llvm_14;
           };
         };
       });

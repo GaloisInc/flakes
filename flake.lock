@@ -119,6 +119,22 @@
         "type": "github"
       }
     },
+    "build-bom-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692482808,
+        "narHash": "sha256-jKF21p5caJm4LLqmz+kA1FncYGQY6Pvg699DUwzfqKM=",
+        "owner": "travitch",
+        "repo": "build-bom",
+        "rev": "14602f7ec951492668972af3696e6cea80eee2d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "travitch",
+        "repo": "build-bom",
+        "type": "github"
+      }
+    },
     "cvc4_src_1_7": {
       "flake": false,
       "locked": {
@@ -244,6 +260,7 @@
         "boolector_src_3_2_0": "boolector_src_3_2_0",
         "boolector_src_3_2_1": "boolector_src_3_2_1",
         "boolector_src_3_2_2": "boolector_src_3_2_2",
+        "build-bom-src": "build-bom-src",
         "cvc4_src_1_7": "cvc4_src_1_7",
         "cvc4_src_1_8": "cvc4_src_1_8",
         "cvc5_src_1_0_0": "cvc5_src_1_0_0",
