@@ -12,7 +12,7 @@
   #   $ nix run github:GaloisInc/flakes#z3.v4_8_14 -- -version
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/22.05";
+    nixpkgs.url = "github:nixos/nixpkgs/23.05";
     flake-utils.url = "github:numtide/flake-utils";
     abc_src_2020_06_22 = {
       url = "github:berkeley-abc/abc/341db2566";
@@ -20,10 +20,6 @@
     };
     abc_src_2021_12_30 = {
       url = "github:berkeley-abc/abc/48498af";
-      flake = false;
-    };
-    bitwuzla_unstable_2021_07_01 = {
-      url = "github:bitwuzla/bitwuzla/58d720598e359b1fdfec4a469c76f1d1f24db51a";
       flake = false;
     };
     boolector_src_3_2_2 = {
@@ -147,7 +143,6 @@
               inherit version;
               src = inps."${"abc_src_" + version}";
             });
-          mkBitwuzla = mkVerPkg "bitwuzla";
           mkBoolector = mkVerPkg "boolector";
           mkCVC4 = version:
             let basePkg = mkVerPkg "cvc4" version;
@@ -201,9 +196,6 @@
             v1_0_1  = mkCVC5 "1.0.1";
             v1_0_2  = mkCVC5 "1.0.2";
           };
-          bitwuzla = pkgs.bitwuzla // { # whatever the nixpkgs current version is...
-            vunstable_2021_07_01 = mkBitwuzla "unstable-2021-07-01";
-          };
           boolector = pkgs.boolector // { # whatever the nixpkgs current version is...
             v3_2   = mkBoolector "3.2.2";
             v3_1   = mkBoolector "3.1.0";
@@ -219,6 +211,9 @@
 
           # -------------------------------------------------
 
+          bitwuzla = import "${self}/bitwuzla" {
+            inherit pkgs;
+          };
           build-bom = import "${self}/build-bom" {
             inherit pkgs;
             src = inps.build-bom-src;
