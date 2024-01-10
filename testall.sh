@@ -21,3 +21,4 @@ nix build .#abc.v2021_12_30;
 for v in 0_3_0 ; do
     nix build .#bitwuzla.v$v;
 done;
+nix build .#build-bom
