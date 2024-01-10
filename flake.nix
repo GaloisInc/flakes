@@ -15,12 +15,12 @@
 
     nixpkgs_2205.url = "github:nixos/nixpkgs/22.05";
     # nixpkgs circa 22.05 is sufficient to build z3, yices, boolector (check
-    # disabled), cvc4, cvc5, and stp, but not bitwizla_0_3_0.
+    # disabled), cvc4, cvc5, and stp, but not bitwuzla_0_3_0.
 
     # nixpkgs circa 23.05 or later is needed for bitwuzla_0_3_0 (specifically for
     # meson >= 0.64), but 23.05 or later fails for:
     #
-    #    * yices-2.5.4, (multiple definition of smt_opcodes_)t
+    #    * yices-2.5.4, (multiple definition of smt_opcodes_t
     #      during linking)
     #
     #    * cvc5-1.0.0, cvc5-1.0.1, cvc5-1.0.2, nixpkgs 23.05
@@ -211,7 +211,7 @@
           mkBitwuzla = version:
             # Using a local bitwuzla build specification until
             # https://github.com/NixOS/nixpkgs/pull/246779 is merged and
-            # generally availble in pkg, at whic point this can just be mkVerPkg
+            # generally available in pkgs, at which point this can just be mkVerPkg
             # and the local build specification can be removed.
             let bw = pkgs.callPackage "${self}/bitwuzla" {};
                 pkg = "bitwuzla";
