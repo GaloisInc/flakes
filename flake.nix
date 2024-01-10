@@ -254,18 +254,18 @@
             v2_5_4 = mk22Yices "2.5.4";
           };
           stp = pkgs.stp // rec { # whatever the nixpkgs current version is...
-            v2_3   = mkSTP "2.3.3";
+            v2_3   = v2_3_3;
             v2_2   = v2_2_0;
             v2_3_3   = mkSTP "2.3.3";
             v2_3_2   = mkSTP "2.3.2";
             v2_3_1   = mkSTP "2.3.1";
             v2_2_0   = mkVerPkg22 "stp" "2.2.0";
           };
-          cvc4 = pkgs.cvc4 // { # whatever the nixpkgs current version is...
+          cvc4 = pkgs.cvc4 // rec { # whatever the nixpkgs current version is...
             v1_8   = mkCVC4 "1.8";
             v1_7   = mkCVC4 "1.7";
-            v4_1_8   = mkCVC4 "1.8";
-            v4_1_7   = mkCVC4 "1.7";
+            v4_1_8   = v1_8;
+            v4_1_7   = v1_7;
           };
           cvc5 = pkgs.cvc5 // rec { # whatever the nixpkgs current version is...
             v1_0  = v1_0_9;
@@ -284,7 +284,7 @@
             v1_1_0  = mkCVC5 "1.1.0";
           };
           boolector = pkgs.boolector // rec { # whatever the nixpkgs current version is...
-            v3_2   = mkBoolector "3.2.2";
+            v3_2   = v3_2_2;
             v3_1   = v3_1_0;
             v3_2_2   = mkBoolector "3.2.2";
             v3_2_1   = mkBoolector "3.2.1";
