@@ -78,20 +78,14 @@
       url = "github:stp/stp/stp-2.2.0";
       flake = false;
     };
+    # -- n.b. yices odd versions (e.g. 2.6.3) are dev versions, even versions are
+    # -- release versions.  Stick to release versions here.
     yices_src_2_5_4 = {
       url = "github:SRI-CSL/yices2/Yices-2.5.4";
       flake = false;
     };
-    yices_src_2_6_1 = {
-      url = "github:SRI-CSL/yices2/Yices-2.6.1";
-      flake = false;
-    };
     yices_src_2_6_2 = {
       url = "github:SRI-CSL/yices2/Yices-2.6.2";
-      flake = false;
-    };
-    yices_src_2_6_3 = {
-      url = "github:SRI-CSL/yices2/Yices-2.6.3";
       flake = false;
     };
     yices_src_2_6_4 = {
@@ -171,9 +165,7 @@
           yices = pkgs.yices // { # whatever the nixpkgs current version is...
             v2_6   = mkYices "2.6.4";
             v2_6_4 = mkYices "2.6.4";
-            v2_6_3 = mkYices "2.6.3";
             v2_6_2 = mkYices "2.6.2";
-            v2_6_1 = mkYices "2.6.1";
             v2_5_4 = mkYices "2.5.4";
             v2_5   = mkYices "2.5.4";
           };
