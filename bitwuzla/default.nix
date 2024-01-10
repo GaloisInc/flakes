@@ -2,21 +2,21 @@
 # not yet been merged upstream into nixpkgs.
 
 { pkgs
-, stdenv ? pkgs.stdenv
-, fetchFromGitHub ? pkgs.fetchFromGitHub
-, lib ? pkgs.lib
-, python3 ? pkgs.python3
-, meson ? pkgs.meson
-, ninja ? pkgs.ninja
-, git ? pkgs.git
-, gmp ? pkgs.gmp
-, gtest ? pkgs.gtest
-, cadical ? pkgs.cadical
-, symfpu ? pkgs.symfpu
-, kissat ? pkgs.kissat
-, cryptominisat ? pkgs.cryptominisat
-, pkg-config ? pkgs.pkg-config
-, writeTextDir ? pkgs.writeTextDir
+, stdenv
+, fetchFromGitHub
+, lib
+, python3
+, meson
+, ninja
+, git
+, gmp
+, gtest
+, cadical
+, symfpu
+, kissat
+, cryptominisat
+, pkg-config
+, writeTextDir
 }:
 
 stdenv.mkDerivation rec {
