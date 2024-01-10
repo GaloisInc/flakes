@@ -50,6 +50,10 @@
       url = "github:berkeley-abc/abc/48498af";
       flake = false;
     };
+    bitwuzla_src_0_3_0 = {
+      url = "github:bitwuzla/bitwuzla/0.3.0";
+      flake = false;
+    };
     boolector_src_3_2_2 = {
       url = "github:boolector/boolector/3.2.2";
       flake = false;
@@ -204,6 +208,17 @@
               inherit version;
               src = inps."${"abc_src_" + version}";
             });
+          mkBitwuzla = version:
+            # Using a local bitwuzla build specification until
+            # https://github.com/NixOS/nixpkgs/pull/246779 is merged and
+            # generally availble in pkg, at whic point this can just be mkVerPkg
+            # and the local build specification can be removed.
+            let bw = pkgs.callPackage "${self}/bitwuzla" {};
+                pkg = "bitwuzla";
+            in bw.overrideAttrs (_: {
+              inherit version;
+              src = inps."${pkg + "_src_" + cleanVer version}";
+            });
           mkBoolector = mkVerPkg "boolector";
           mkCVC4 = version:
             let basePkg = mkVerPkg "cvc4" version;
@@ -280,12 +295,12 @@
             v2020_06_22 = mkABC "2020_06_22";
             v2021_12_30 = mkABC "2021_12_30";
           };
+          bitwuzla = mkBitwuzla "0_3_0" // {
+            v0_3_0 = mkBitwuzla "0_3_0";
+          };
 
           # -------------------------------------------------
 
-          bitwuzla = import "${self}/bitwuzla" {
-            inherit pkgs;
-          };
           build-bom = import "${self}/build-bom" {
             inherit pkgs;
             src = inps.build-bom-src;
