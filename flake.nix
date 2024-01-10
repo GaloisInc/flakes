@@ -283,13 +283,17 @@
             v1_0_9  = mkCVC5 "1.0.9";
             v1_1_0  = mkCVC5 "1.1.0";
           };
-          boolector = pkgs.boolector // { # whatever the nixpkgs current version is...
+          boolector = pkgs.boolector // rec { # whatever the nixpkgs current version is...
             v3_2   = mkBoolector "3.2.2";
-            v3_1   = mkBoolector "3.1.0";
+            v3_1   = v3_1_0;
             v3_2_2   = mkBoolector "3.2.2";
             v3_2_1   = mkBoolector "3.2.1";
             v3_2_0   = mkBoolector "3.2.0";
-            v3_1_0   = mkBoolector "3.1.0";
+            v3_1_0   = (mkBoolector "3.1.0").overrideAttrs(o:
+              {
+                cmakeFlags = o.cmakeFlags ++ [ "-DUSE_CADICAL=YES" ];
+                buildInputs = o.buildInputs ++ [ pkgs.cadical ];
+              });
           };
           abc = pkgs.abc-verifier // {
             v2020_06_22 = mkABC "2020_06_22";
