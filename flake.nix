@@ -311,8 +311,7 @@
           };
           build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
             inherit pkgs build-bom;
-            clang = pkgs.clang_14;
-            llvm = pkgs.llvm_14;
+            inherit (pkgs) gnumake gnutar bintools;
           };
         };
       });
