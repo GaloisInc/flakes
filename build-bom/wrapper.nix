@@ -6,13 +6,20 @@
 # example:
 #
 # openssl-bc = build-bom-wrapper {} pkgs.openssl;
+#
+# Note that a default-build-bom is passed, but the user may override this. This
+# is to provide an alternative to the fix-point evaluation of pkgs that is
+# difficult to provide from the top-level flake, to support cases where the
+# build-bom used here must be modified by the user (e.g. to allow modifications
+# like: impureEnvVars = [ "HTTP_PROXY" "HTTPS_PROXY" ]).
 
-{ pkgs, build-bom
+{ pkgs, default-build-bom
 , gnumake, gnutar, bintools
 }:
 
 { clang ? pkgs.clang_14
 , llvm ? pkgs.llvm_14
+, build-bom ? default-build-bom
 , extra-build-bom-flags ? ""
 , extra-buildInputs ? []
 }:

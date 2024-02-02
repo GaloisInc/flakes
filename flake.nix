@@ -310,8 +310,9 @@
             src = inps.build-bom-src;
           };
           build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
-            inherit pkgs build-bom;
+            inherit pkgs;
             inherit (pkgs) gnumake gnutar bintools;
+            default-build-bom = build-bom;
           };
         };
       });
