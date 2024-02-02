@@ -21,7 +21,7 @@ drv: drv.overrideAttrs(oldAttrs:
               MAKE="${build-bom}/bin/build-bom generate-bitcode -- make";
             };
   in bld // rec {
-    outputs = oldAttrs.outputs ++ [ "bc" ];
+    outputs = (oldAttrs.outputs or []) ++ [ "bc" ];
     nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [
       clang
       llvm
