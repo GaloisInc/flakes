@@ -8,6 +8,7 @@
 , postUnpack ? null
 }:
 
+builtins.trace ("generating build-bom " + (if postUnpack == null then "regular" else "with postUnpack"))
 pkgs.rustPlatform.buildRustPackage {
   pname = "build-bom";
   version = "0.1.0";
