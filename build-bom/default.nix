@@ -5,6 +5,7 @@
   { owner = "travitch"; repo = "build-bom";
     rev = "14602f7"; # "master";
   }
+, postUnpack ? null
 }:
 
 pkgs.rustPlatform.buildRustPackage {
@@ -15,4 +16,5 @@ pkgs.rustPlatform.buildRustPackage {
   nativeBuildInputs = [ pkgs.clang_12 pkgs.llvm_12 ];
   # cargoSha256 = lib.fakeSha256;
   cargoSha256 = "sha256-k2NGJWj8IKMeNUTbdSFquaqcDCN+lBNzpfc7HAXufrA=";
+  inherit postUnpack;
 }

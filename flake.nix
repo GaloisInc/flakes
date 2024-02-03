@@ -308,6 +308,7 @@
           build-bom = import "${self}/build-bom" {
             inherit pkgs;
             src = inps.build-bom-src;
+            postUnpack = null;
           };
           build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
             inherit pkgs;
