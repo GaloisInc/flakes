@@ -39,6 +39,26 @@ drv: drv.overrideAttrs(oldAttrs:
         buildPhase = ''
           runHook preBuild
 
+          _accumFlagsArray() {
+              local name
+              if [ -n "''$__structuredAttrs" ]; then
+                  for name in "''$@"; do
+                      local -n nameref="$name"
+                      flagsArray+=( ''${nameref+"''${nameref[@]}"} )
+                  done
+              else
+                  for name in "''$@"; do
+                      local -n nameref="''$name"
+                      case "''$name" in
+                          *Array)
+                              flagsArray+=( ''${nameref+"''${nameref[@]}"} ) ;;
+                          *)
+                              flagsArray+=( ''${nameref-} ) ;;
+                      esac
+                  done
+              fi
+          }
+
           if [[ -z "''${makeFlags-}" && -z "''${makefile:-}" && ! ( -e Makefile || -e makefile || -e GNUmakefile ) ]]; then
               echo "no Makefile or custom buildPhase, doing nothing"
           else
