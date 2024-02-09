@@ -90,13 +90,15 @@ drv: drv.overrideAttrs(oldAttrs:
     postInstall = ''
       mkdir $bc
       extract_bc() {
-        cd $1
-        for X in $(${pkgs.findutils}/bin/find . -type f); do
-          if ${pkgs.file}/bin/file $X | grep -q ELF ; then
-            mkdir -p $bc/$(dirname $X)
-            ${build-bom}/bin/build-bom extract-bitcode -o $bc/$X.bc $X
-          fi
-        done
+        (
+          cd $1
+          for X in $(${pkgs.findutils}/bin/find . -type f); do
+            if ${pkgs.file}/bin/file $X | grep -q ELF ; then
+              mkdir -p $bc/$(dirname $X)
+              ${build-bom}/bin/build-bom extract-bitcode -o $bc/$X.bc $X
+            fi
+          done
+        )
       }
 
       if [ "X$out" != "X" ] ; then extract_bc $out; fi
