@@ -8,7 +8,13 @@
         galois-flakes.url = "github:galoisinc/flakes";
         build-bom.url = "github:kquick/build-bom/vspells_te4";
         ardupilot-src = {
-          url = "github:ArduPilot/ardupilot";
+          url = "github:ArduPilot/ardupilot/43adaf3"; # master version; versions for following inputs mirror git submodule settings
+          flake = false;
+        };
+        empy-src = {
+          # url = "https://files.pythonhosted.org/packages/source/e/empy-3.3.4.tar.gz";
+          # url = "https://pypi.io/packages/source/e/empy-4.3.4.tar.gz";
+          url = "http://www.alcyone.com/software/empy/empy-3.3.4.tar.gz";
           flake = false;
         };
         waf-src = {
@@ -51,6 +57,7 @@
 
     outputs = { self, nixpkgs, levers, build-bom, galois-flakes
               , ardupilot-src
+              , empy-src
               , waf-src
               , libcanard-src
               , mavlink-src
@@ -95,13 +102,23 @@
             tgtpkgs = pkgs.pkgsCross.gnu32;
             use-build-bom = galois-flakes.outputs.packages."${system}".build-bom-wrapper
               {
-                extra-build-bom-flags = "-E --inject-argument=-m32 -v";
-                extra-buildInputs = [ tgtpkgs.cmake ];
+                extra-build-bom-flags = ["-v"];
                 build-bom = build-bom.packages.${system}.build-bom;
               };
         in {
           default = self.packages.${system}.copter;
 
+          empy = pkgs.python3Packages.buildPythonPackage rec {
+              name = "empy";
+              src = empy-src;
+              # propagatedBuildInputs =
+              #   let pp = pkgs.python3Packages; in [
+              #       ];
+              doCheck = false;
+              pythonImportsCheck = [ "em" ];
+              format = "setuptools";
+              # MDEF = "${mavlink-src}/message_definitions";
+          };
           pymavlink = pkgs.python3Packages.buildPythonPackage rec {
               name = "pymavlink";
               src = pymavlink-src;
@@ -136,7 +153,7 @@
                   self.packages.${system}.pymavlink
                   self.packages.${system}.dronecan
               ] ++ (with pkgs.python3Packages; [
-                  empy
+                  self.packages.${system}.empy
                   pexpect
                   setuptools
                   self.packages.${system}.dronecan
@@ -164,8 +181,8 @@
 
                 # [ -d modules/DroneCAN/pydronecan ] && rmdir modules/DroneCAN/pydronecan || true
                 # ln -s ${pydronecan-src} modules/DroneCAN/pydronecan
-                # [ -d modules/DroneCAN/libcanard ] && rmdir modules/DroneCAN/libcanard || true
-                # ln -s ${libcanard-src} modules/DroneCAN/libcanard
+                [ -d modules/DroneCAN/libcanard ] && rmdir modules/DroneCAN/libcanard || true
+                ln -s ${libcanard-src} modules/DroneCAN/libcanard
 
                 [ -d modules/lwip ] && rmdir modules/lwip || true
                 ln -s ${lwip-src} modules/lwip
@@ -175,6 +192,7 @@
               '';
               patches = [ "${self}/patch_warnings" ];
           };
+          sitl_bc = use-build-bom self.packages.${system}.sitl;
         });
     };
 
