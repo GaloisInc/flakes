@@ -70,9 +70,8 @@
       url = "github:boolector/boolector/3.1.0";
       flake = false;
     };
-    build-bom-src = {
-      url = "github:travitch/build-bom";
-      flake = false;
+    build-bom = {
+      url = "github:GaloisInc/flakes?dir=build-bom";
     };
     cvc4_src_1_8 = {
       url = "github:cvc4/cvc4/1.8";
@@ -305,15 +304,11 @@
 
           # -------------------------------------------------
 
-          build-bom = import "${self}/build-bom" {
-            inherit pkgs;
-            src = inps.build-bom-src;
-            postUnpack = null;
-          };
+          build-bom = inps.build-bom.packages.${system}.build-bom;
           build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
             inherit pkgs;
             inherit (pkgs) gnumake gnutar bintools;
-            default-build-bom = build-bom;
+            default-build-bom = self.packages.${system}.build-bom;
           };
         };
       });
