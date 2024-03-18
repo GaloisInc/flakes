@@ -12,8 +12,6 @@
           flake = false;
         };
         empy-src = {
-          # url = "https://files.pythonhosted.org/packages/source/e/empy-3.3.4.tar.gz";
-          # url = "https://pypi.io/packages/source/e/empy-4.3.4.tar.gz";
           url = "http://www.alcyone.com/software/empy/empy-3.3.4.tar.gz";
           flake = false;
         };
@@ -27,6 +25,10 @@
         };
         mavlink-src = {
           url = "github:ArduPilot/mavlink/130a836";
+          flake = false;
+        };
+        mavproxy-src = {
+          url = "github:ardupilot/mavproxy";
           flake = false;
         };
         pymavlink-src = {
@@ -61,6 +63,7 @@
               , waf-src
               , libcanard-src
               , mavlink-src
+              , mavproxy-src
               , pymavlink-src
               , googletest-src
               , dronecan_DSDL-src
@@ -98,11 +101,20 @@
         });
       packages = levers.eachSystem (system:
         let pkgs = import nixpkgs { inherit system; };
-            # CFS for Linux currently only supports a 32-bit target.
-            tgtpkgs = pkgs.pkgsCross.gnu32;
             use-build-bom = galois-flakes.outputs.packages."${system}".build-bom-wrapper
               {
-                extra-build-bom-flags = ["-v"];
+                extra-build-bom-flags = [
+                  # "-E"
+                  # "-v"
+
+                  # AP_Common.c tries to ensure the right size for float
+                  # constants via "static_assert(sizeof(1e6) == sizeof(float),
+                  # ...)" which is obtained in gcc via
+                  # -fsingle-precision-constant, but clang's version is
+                  # -cl-single-precision-constant
+                  "--inject-argument=-cl-single-precision-constant"
+                ];
+                # extra-buildInputs = [ pkgs.pkgsCross.gnu32.cmake ];
                 build-bom = build-bom.packages.${system}.build-bom;
               };
         in {
@@ -111,14 +123,24 @@
           empy = pkgs.python3Packages.buildPythonPackage rec {
               name = "empy";
               src = empy-src;
-              # propagatedBuildInputs =
-              #   let pp = pkgs.python3Packages; in [
-              #       ];
               doCheck = false;
               pythonImportsCheck = [ "em" ];
               format = "setuptools";
-              # MDEF = "${mavlink-src}/message_definitions";
           };
+          mavproxy = pkgs.python3Packages.buildPythonPackage rec {
+              name = "mavproxy";
+              src = mavproxy-src;
+              propagatedBuildInputs =
+                let pp = pkgs.python3Packages; in [
+                      self.packages.${system}.pymavlink
+                      pp.pyserial
+                      pp.numpy
+                    ];
+              doCheck = false;
+              pythonImportsCheck = [ "MAVProxy" ];
+              format = "setuptools";
+          };
+
           pymavlink = pkgs.python3Packages.buildPythonPackage rec {
               name = "pymavlink";
               src = pymavlink-src;
@@ -143,11 +165,69 @@
               ];
               doCheck = false;
           };
-          sitl = pkgs.stdenv.mkDerivation {
+          sim_vehicle = pkgs.stdenv.mkDerivation {
+            name = "sim_vehicle";
+            version = "1.0";
+            src = "${ardupilot-src}/Tools/autotest";
+            configurePhase = "";
+            buildPhase = ''
+              cat > sim_vehicle << EOF
+              #!/usr/bin/env bash
+              set -x
+              export PATH=$PATH
+              export PYTHONPATH=${self.packages.${system}.mavproxy}/lib:$out/lib:$PYTHONPATH
+              echo Defaulting to arducopter via --vehicle-binary=${self.packages.${system}.sitl}/bin/arducopter
+              echo Override via explicit --vehicle-binary specification
+              python3 $out/bin/Tools/autotest/sim_vehicle.py --no-rebuild --no-configure --vehicle-binary=${self.packages.${system}.sitl}/bin/arducopter "\''${@}"
+              EOF
+              sed -i -e '/TMUX/s,screen",screen" -o "$TERM" = "screen-256color",' run_in_terminal_window.sh
+            '';
+            buildInputs = [
+              pkgs.python3
+              self.packages.${system}.sitl
+              self.packages.${system}.mavproxy
+            ];
+            propagatedBuildInputs =
+              let pp = pkgs.python3Packages;
+              in [
+                pp.pexpect
+                pkgs.procps
+                pkgs.tmux
+                pkgs.xterm
+              ];
+            installPhase = ''
+              mkdir -p $out/bin/Tools/autotest
+              cp sim_vehicle.py $out/bin/Tools/autotest/
+              install run_in_terminal_window.sh $out/bin/Tools/autotest/
+              mkdir -p $out/lib/pysim
+              cp -r pysim/* $out/lib/pysim/
+
+              # sim_vehicle.py has some baked-in assumptions
+              mkdir -p $out/bin/{ArduCopter,ArduPlane,ArduSub,Blimp,Rover}
+
+              mkdir $out/bin/Tools/autotest/default_params
+              cp -r default_params/* $out/bin/Tools/autotest/default_params
+
+              install sim_vehicle $out/bin/
+            '';
+            # Usage: sim_vehicle --console --map --osd -v ArduCopter
+            # KWQ: not fully working yet
+          };
+          sitl =
+            let tgts = [
+                  "all"
+                  # copter heli plane rover sub antennatracker AP_Periph
+                ];
+                waf_flags = [
+                  "--board" "sitl"
+                  "--no-submodule-update"
+                  # "--prefix=$out"
+                ];
+            in pkgs.stdenv.mkDerivation {
               name = "ardupilot-sitl";
               version = "1.0";
               src = ardupilot-src;
-              propagatedBuildInputs = [
+              buildInputs = [
                   pkgs.gcc
                   pkgs.wafHook
                   self.packages.${system}.pymavlink
@@ -158,9 +238,18 @@
                   setuptools
                   self.packages.${system}.dronecan
               ]);
-              wafConfigureFlags = [ "--board" "sitl"
-                                    "--no-submodule-update"
-                                  ];
+              wafConfigureFlags = waf_flags;
+              wafBuildTargets = tgts;
+              wafBuildFlags = waf_flags;
+              wafInstallTargets = tgts;
+              # n.b. the waf configuration does not seem to want to install into
+              # --prefix, --destdir, or --out, so it's done manually in the
+              # postInstall hook here.
+              wafInstallFlags = waf_flags;
+              postInstall = ''
+                mkdir $out/bin
+                cp build/sitl/bin/* $out/bin/
+              '';
               # Pre-configure fixes: the ardupilot waf requires that a number of
               # the submodules be actually present.  Use flake inputs to supplant
               # the use of git submodules.
