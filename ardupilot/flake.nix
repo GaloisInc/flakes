@@ -5,8 +5,8 @@
             url = "github:kquick/nix-levers";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        galois-flakes.url = "github:galoisinc/flakes";
-        build-bom.url = "github:kquick/build-bom/vspells_te4";
+        galois-flakes.url = "github:GaloisInc/flakes";
+        build-bom.url = "github:GaloisInc/flakes?dir=build-bom";
         ardupilot-src = {
           url = "github:ArduPilot/ardupilot/43adaf3"; # master version; versions for following inputs mirror git submodule settings
           flake = false;
