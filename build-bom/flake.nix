@@ -7,7 +7,11 @@
       levers = {
           url = "github:kquick/nix-levers";
           inputs.nixpkgs.follows = "nixpkgs";
-        };
+      };
+      build-bom-src = {
+        url = "github:travitch/build-bom";
+        flake = false;
+      };
       aho-corasick-src = {
           url = "https://crates.io/api/v1/crates/aho-corasick/0.7.18/download";
           flake = false;
@@ -433,6 +437,7 @@
     {
         packages = levers.eachSystem (system:
               let pkgs = import nixpkgs { inherit system; };
+                  build-bom-src = inps.build-bom-src;
                   rustBld = pname: src: version: packagename: deps:
                       pkgs.stdenv.mkDerivation {
                         pname = pname;
@@ -546,7 +551,7 @@
                     autocfg-unpacked = rustUnpack "autocfg" inps.autocfg-src "1.0.1" "autocfg";
                     bitflags-unpacked = rustUnpack "bitflags" inps.bitflags-src "1.2.1" "bitflags";
                     block-buffer-unpacked = rustUnpack "block-buffer" inps.block-buffer-src "0.9.0" "block-buffer";
-                    build-bom = rustBld "build-bom" self "0.2.0" "build-bom" [
+                    build-bom = rustBld "build-bom" build-bom-src "0.2.0" "build-bom" [
                         "aho-corasick"
                         "anstream"
                         "anstyle"
