@@ -162,7 +162,7 @@ let
   wrapDrv = pkgs.stdenv.mkDerivation {
     name = drv.name + "-bc";
     src = updDrv.src;
-    buildPhase = "";
+    buildPhase = "echo nothing to do in wrapper for build phase";
     installPhase = gen_bc_out updDrv.out;
     outputs = [ "out" "bc" ];
   };
