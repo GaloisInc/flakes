@@ -54,6 +54,10 @@
       url = "github:bitwuzla/bitwuzla/0.3.0";
       flake = false;
     };
+    boolector_src_3_2_3 = {
+      url = "github:boolector/boolector/3.2.3";
+      flake = false;
+    };
     boolector_src_3_2_2 = {
       url = "github:boolector/boolector/3.2.2";
       flake = false;
@@ -283,8 +287,9 @@
             v1_1_0  = mkCVC5 "1.1.0";
           };
           boolector = pkgs.boolector // rec { # whatever the nixpkgs current version is...
-            v3_2   = v3_2_2;
+            v3_2   = v3_2_3;
             v3_1   = v3_1_0;
+            v3_2_3   = mkBoolector "3.2.3";
             v3_2_2   = mkBoolector "3.2.2";
             v3_2_1   = mkBoolector "3.2.1";
             v3_2_0   = mkBoolector "3.2.0";
