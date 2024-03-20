@@ -50,8 +50,16 @@
       url = "github:berkeley-abc/abc/48498af";
       flake = false;
     };
+    abc_src_2024_03_19 = {
+      url = "github:berkeley-abc/abc/783a540";
+      flake = false;
+    };
     bitwuzla_src_0_3_0 = {
       url = "github:bitwuzla/bitwuzla/0.3.0";
+      flake = false;
+    };
+    boolector_src_3_2_3 = {
+      url = "github:boolector/boolector/3.2.3";
       flake = false;
     };
     boolector_src_3_2_2 = {
@@ -117,6 +125,10 @@
       url = "github:cvc5/cvc5/cvc5-1.1.0";
       flake = false;
     };
+    cvc5_src_1_1_2 = {
+      url = "github:cvc5/cvc5/cvc5-1.1.2";
+      flake = false;
+    };
     stp_src_2_3_3 = {
       url = "github:stp/stp/2.3.3";
       flake = false;
@@ -173,6 +185,10 @@
     };
     z3_src_4_8_14 = {
       url = "github:z3prover/z3/z3-4.8.14";
+      flake = false;
+    };
+    z3_src_4_13_0 = {
+      url = "github:z3prover/z3/z3-4.13.0";
       flake = false;
     };
   };
@@ -244,6 +260,7 @@
             v4_8_12 = mkZ3 "4.8.12";
             v4_8_13 = mkZ3 "4.8.13";
             v4_8_14 = mkZ3 "4.8.14";
+            v4_13_0 = mkZ3 "4.13.0";
           };
           yices = pkgs.yices // rec { # whatever the nixpkgs current version is...
             v2_6   = v2_6_4;
@@ -281,10 +298,12 @@
             v1_0_8  = mkCVC5 "1.0.8";
             v1_0_9  = mkCVC5 "1.0.9";
             v1_1_0  = mkCVC5 "1.1.0";
+            v1_1_2  = mkCVC5 "1.1.2";
           };
           boolector = pkgs.boolector // rec { # whatever the nixpkgs current version is...
-            v3_2   = v3_2_2;
+            v3_2   = v3_2_3;
             v3_1   = v3_1_0;
+            v3_2_3   = mkBoolector "3.2.3";
             v3_2_2   = mkBoolector "3.2.2";
             v3_2_1   = mkBoolector "3.2.1";
             v3_2_0   = mkBoolector "3.2.0";
@@ -297,6 +316,7 @@
           abc = pkgs.abc-verifier // {
             v2020_06_22 = mkABC "2020_06_22";
             v2021_12_30 = mkABC "2021_12_30";
+            v2024_03_19 = mkABC "2024_03_19";
           };
           bitwuzla = mkBitwuzla "0_3_0" // {
             v0_3_0 = mkBitwuzla "0_3_0";
