@@ -234,7 +234,6 @@
                   pkgs.gcc
                   pkgs.wafHook
                   self.packages.${system}.pymavlink
-                  self.packages.${system}.dronecan
               ] ++ (with pkgs.python3Packages; [
                   self.packages.${system}.empy
                   pexpect
@@ -267,14 +266,14 @@
                 ln -s ${googletest-src} modules/gtest
 
                 [ -d modules/DroneCAN/DSDL ] && rmdir modules/DroneCAN/DSDL || true
-                ln -s ${dronecan_DSDL-src} modules/DroneCAN/DSDL
+                [ -d modules/DroneCAN ] && ln -s ${dronecan_DSDL-src} modules/DroneCAN/DSDL
                 [ -d modules/DroneCAN/dronecan_dsdlc ] && rmdir modules/DroneCAN/dronecan_dsdlc || true
-                ln -s ${dronecan_dsdlc-src} modules/DroneCAN/dronecan_dsdlc
+                [ -d modules/DroneCAN ] && ln -s ${dronecan_dsdlc-src} modules/DroneCAN/dronecan_dsdlc
 
                 # [ -d modules/DroneCAN/pydronecan ] && rmdir modules/DroneCAN/pydronecan || true
                 # ln -s ${pydronecan-src} modules/DroneCAN/pydronecan
                 [ -d modules/DroneCAN/libcanard ] && rmdir modules/DroneCAN/libcanard || true
-                ln -s ${libcanard-src} modules/DroneCAN/libcanard
+                [ -d modules/DroneCAN ] && ln -s ${libcanard-src} modules/DroneCAN/libcanard
 
                 [ -d modules/lwip ] && rmdir modules/lwip || true
                 ln -s ${lwip-src} modules/lwip
