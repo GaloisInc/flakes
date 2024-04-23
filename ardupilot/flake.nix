@@ -116,6 +116,9 @@
                 ];
                 # extra-buildInputs = [ pkgs.pkgsCross.gnu32.cmake ];
                 build-bom = build-bom.packages.${system}.build-bom;
+                # Use older clang/llvm because newer has import problems
+                clang = pkgs.clang_12;
+                llvm = pkgs.llvm_12;
               };
         in {
           default = self.packages.${system}.copter;
