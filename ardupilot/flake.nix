@@ -121,7 +121,7 @@
                 llvm = pkgs.llvm_12;
               };
         in {
-          default = self.packages.${system}.copter;
+          default = self.packages.${system}.sitl_bc;
 
           empy = pkgs.python3Packages.buildPythonPackage rec {
               name = "empy";
