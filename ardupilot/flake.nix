@@ -11,6 +11,10 @@
           url = "github:ArduPilot/ardupilot/43adaf3"; # master version; versions for following inputs mirror git submodule settings
           flake = false;
         };
+        ardupilot-patches = {
+          url = "./patches";
+          flake = false;
+        };
         empy-src = {
           url = "http://www.alcyone.com/software/empy/empy-3.3.4.tar.gz";
           flake = false;
@@ -59,6 +63,7 @@
 
     outputs = { self, nixpkgs, levers, build-bom, galois-flakes
               , ardupilot-src
+              , ardupilot-patches
               , empy-src
               , waf-src
               , libcanard-src
@@ -281,7 +286,16 @@
                 # Ensure that the build process can see the pydronecan package
                 export PYTHONPATH=${self.packages.${system}.dronecan}/lib/python*/site-packages:$PYTHONPATH
               '';
-              patches = [ "${self}/patch_warnings" ];
+              patches =
+                # Apply all patches in the specified input location.  This allows
+                # override of the patches applied if the ardupilot-source is
+                # overridden.
+                let contents = builtins.readDir ardupilot-patches;
+                    isFile = n: contents.${n} == "regular";
+                    files = builtins.filter isFile (builtins.attrNames contents);
+                    fullPath = f: "${ardupilot-patches}/${f}";
+                    patchfiles = builtins.map fullPath files;
+                in patchfiles;
           };
           sitl_bc = use-build-bom self.packages.${system}.sitl;
         });
