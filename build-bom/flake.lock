@@ -120,6 +120,22 @@
         "url": "https://crates.io/api/v1/crates/block-buffer/0.9.0/download"
       }
     },
+    "build-bom-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711171166,
+        "narHash": "sha256-OXpAin5PjdxS/yJUQzeW+4/EJz58NHhVhRw9KBNWsDw=",
+        "owner": "travitch",
+        "repo": "build-bom",
+        "rev": "33e4fd313e1a1bc17f72bceca019359825638676",
+        "type": "github"
+      },
+      "original": {
+        "owner": "travitch",
+        "repo": "build-bom",
+        "type": "github"
+      }
+    },
     "byteorder-src": {
       "flake": false,
       "locked": {
@@ -814,6 +830,7 @@
         "autocfg-src": "autocfg-src",
         "bitflags-src": "bitflags-src",
         "block-buffer-src": "block-buffer-src",
+        "build-bom-src": "build-bom-src",
         "byteorder-src": "byteorder-src",
         "cc-src": "cc-src",
         "cfg-if-0_1_10-src": "cfg-if-0_1_10-src",
