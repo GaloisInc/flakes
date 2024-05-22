@@ -43,21 +43,16 @@
           url = "github:ArduPilot/googletest/c5fed93";
           flake = false;
         };
-        dronecan_DSDL-src = {
-          url = "github:DroneCAN/DSDL/de93d9c";
-          flake = false;
-        };
         dronecan_dsdlc-src = {
           url = "github:DroneCAN/dronecan_dsdlc/2465ace";
             flake = false;
         };
-        pydronecan-src = {
-          url = "github:DroneCAN/pydronecan/1f494e9";
-          flake = false;
-        };
         lwip-src = {
             url = "github:ArduPilot/lwip/143a6a5";
             flake = false;
+        };
+        CANBUS = {
+          url = "/home/kquick/work/galois-flakes-git2023/pydronecan";
         };
     };
 
@@ -71,10 +66,9 @@
               , mavproxy-src
               , pymavlink-src
               , googletest-src
-              , dronecan_DSDL-src
               , dronecan_dsdlc-src
-              , pydronecan-src
               , lwip-src
+              , CANBUS
               , ... }:
     {
       apps = levers.eachSystem (s:
@@ -162,17 +156,8 @@
               format = "setuptools";
               MDEF = "${mavlink-src}/message_definitions";
           };
-          dronecan = pkgs.python3Packages.buildPythonPackage rec {
-              name = "dronecan";
-              src = pydronecan-src;
-              preConfigure = ''
-                ln -s ${dronecan_DSDL-src} dronecan/dsdl_specs
-              '';
-              propagatedBuildInputs = [
-
-              ];
-              doCheck = false;
-          };
+          dronecan = CANBUS.packages.${system}.pydronecan or
+            CANBUS.packages.${system}.uavcan;
           sim_vehicle = pkgs.stdenv.mkDerivation {
             name = "sim_vehicle";
             version = "1.0";
@@ -271,12 +256,12 @@
                 ln -s ${googletest-src} modules/gtest
 
                 [ -d modules/DroneCAN/DSDL ] && rmdir modules/DroneCAN/DSDL || true
-                [ -d modules/DroneCAN ] && ln -s ${dronecan_DSDL-src} modules/DroneCAN/DSDL
+                [ -d modules/DroneCAN ] && ln -s ${CANBUS.packages.${system}.dsdl} modules/DroneCAN/DSDL
+
                 [ -d modules/DroneCAN/dronecan_dsdlc ] && rmdir modules/DroneCAN/dronecan_dsdlc || true
                 [ -d modules/DroneCAN ] && ln -s ${dronecan_dsdlc-src} modules/DroneCAN/dronecan_dsdlc
 
                 # [ -d modules/DroneCAN/pydronecan ] && rmdir modules/DroneCAN/pydronecan || true
-                # ln -s ${pydronecan-src} modules/DroneCAN/pydronecan
                 [ -d modules/DroneCAN/libcanard ] && rmdir modules/DroneCAN/libcanard || true
                 [ -d modules/DroneCAN ] && ln -s ${libcanard-src} modules/DroneCAN/libcanard
 
