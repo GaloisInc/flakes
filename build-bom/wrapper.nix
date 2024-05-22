@@ -37,8 +37,14 @@ let
           });
     in drv1;
   bld = oldAttrs:
-    if builtins.elem pkgs.wafHook (oldAttrs.buildInputs or []) ||
-       builtins.elem pkgs.wafHook (oldAttrs.propagatedBuildInputs or [])
+    let usingWaf =
+          let hasWaf = e: builtins.hasAttr "waf" e;
+          in builtins.any hasWaf (oldAttrs.buildInputs)
+             || builtins.any hasWaf (oldAttrs.propagatedBuildInputs)
+             || builtins.elem pkgs.wafHook oldAttrs.buildInputs
+             || builtins.elem pkgs.wafHook oldAttrs.propagatedBuildInputs;
+    in
+    if usingWaf
     then
       # Adding the wafHook causes waf build/install operations to be inserted by
       # setup_hook at execution time, not at the derivation specification time
