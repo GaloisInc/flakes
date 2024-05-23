@@ -386,11 +386,11 @@
       },
       "locked": {
         "dir": "build-bom",
-        "lastModified": 1716440051,
-        "narHash": "sha256-2+iJTu6/qCzqLkANsPd/PrQ0Dg2MxaTGTl2oOJ1IiUk=",
+        "lastModified": 1716443283,
+        "narHash": "sha256-crifqaFdvuiur7hKuuronHkZiwU4ewYWrPgE2aunjDo=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "d913a65b2b11f1838c9b40630c351b6621c7635a",
+        "rev": "bd7ef3cb76798abfa49e364d786eb56da47e75e8",
         "type": "github"
       },
       "original": {
