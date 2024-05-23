@@ -327,7 +327,7 @@
           build-bom = inps.build-bom.packages.${system}.build-bom;
           build-bom-wrapper = import "${self}/build-bom/wrapper.nix" {
             inherit pkgs;
-            inherit (pkgs) gnumake gnutar bintools;
+            inherit (pkgs) gnumake gnutar binutils;
             default-build-bom = self.packages.${system}.build-bom;
           };
         };

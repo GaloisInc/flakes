@@ -14,7 +14,7 @@
 # like: impureEnvVars = [ "HTTP_PROXY" "HTTPS_PROXY" ]).
 
 { pkgs, default-build-bom
-, gnumake, gnutar, bintools
+, gnumake, gnutar, binutils
 }:
 
 { clang ? pkgs.clang_16
@@ -133,7 +133,7 @@ let
     let moreInputs = [
           clang
           llvm
-          bintools
+          binutils
           gnutar
         ];
         fullInputs = (oldAttrs.nativeBuildInputs or []) ++
@@ -154,7 +154,7 @@ let
               mkdir -p $bc/$(dirname $X)
               ${build-bom}/bin/build-bom extract-bitcode -v \
                   --llvm-link ${llvm}/bin/llvm-link \
-                  --objcopy ${bintools}/bin/objcopy \
+                  --objcopy ${binutils}/bin/objcopy \
                   $X -o $bc/$X.bc
             fi
           done
@@ -170,7 +170,7 @@ let
     src = updDrv.src;
     buildPhase = "echo nothing to do in wrapper for build phase";
     installPhase = gen_bc_out updDrv.out;
-    nativeBuildInputs = [ llvm bintools gnutar ];
+    nativeBuildInputs = [ llvm binutils gnutar ];
     outputs = [ "out" "bc" ];
   };
 
