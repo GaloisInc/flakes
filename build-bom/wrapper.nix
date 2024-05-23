@@ -145,6 +145,12 @@ let
       mkdir $out
       cp -r ${forTgts}/* $out/
 
+      if [ -r ${binutils}/nix-support/orig-bintools ] ; then
+        objcopy_bin=$(cat ${binutils}/nix-support/orig-bintools)
+      else
+        objcopy_bin=${binutils}/bin/objcopy
+      fi
+
       mkdir $bc
       extract_bc() {
         (
@@ -154,7 +160,7 @@ let
               mkdir -p $bc/$(dirname $X)
               ${build-bom}/bin/build-bom extract-bitcode -v \
                   --llvm-link ${llvm}/bin/llvm-link \
-                  --objcopy ${binutils}/bin/objcopy \
+                  --objcopy $objcopy_bin \
                   $X -o $bc/$X.bc
             fi
           done
