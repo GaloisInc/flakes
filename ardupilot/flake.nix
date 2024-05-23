@@ -57,6 +57,8 @@
         CANBUS = {
           url = "github:GaloisInc/flakes?dir=pydronecan";
           inputs.nixpkgs.follows = "nixpkgs";
+          inputs.levers.follows = "levers";
+          inputs.galois-flakes.follows = "galois-flakes";
         };
     };
 
