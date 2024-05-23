@@ -4,24 +4,27 @@
       "inputs": {
         "galois-flakes": "galois-flakes",
         "levers": "levers_2",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "pyuavcan-src": "pyuavcan-src",
         "uavcan-src": "uavcan-src",
         "uavcan_DSDL-src": "uavcan_DSDL-src"
       },
       "locked": {
         "dir": "uavcan",
-        "dirtyRev": "7180a89ce119d314e48f1590efb4dc7356b4bdd5-dirty",
-        "dirtyShortRev": "7180a89-dirty",
-        "lastModified": 1716220168,
-        "narHash": "sha256-RTqDNChH6yZMN68NW3zvZfHU6XcoV7UBlAdGJMbn5iQ=",
-        "type": "git",
-        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=uavcan"
+        "lastModified": 1716440051,
+        "narHash": "sha256-2+iJTu6/qCzqLkANsPd/PrQ0Dg2MxaTGTl2oOJ1IiUk=",
+        "owner": "GaloisInc",
+        "repo": "flakes",
+        "rev": "d913a65b2b11f1838c9b40630c351b6621c7635a",
+        "type": "github"
       },
       "original": {
         "dir": "uavcan",
-        "type": "git",
-        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=uavcan"
+        "owner": "GaloisInc",
+        "repo": "flakes",
+        "type": "github"
       }
     },
     "abc_src_2020_06_22": {
@@ -396,7 +399,9 @@
         "googletest-src": [
           "googletest-src"
         ],
-        "levers": "levers_5",
+        "levers": [
+          "levers"
+        ],
         "libcanard-src": [
           "libcanard-src"
         ],
@@ -417,17 +422,18 @@
       },
       "locked": {
         "dir": "ardupilot",
-        "dirtyRev": "23be71c0a10168a8c36fa8dbe50a242f99c67a68-dirty",
-        "dirtyShortRev": "23be71c-dirty",
-        "lastModified": 1716417814,
-        "narHash": "sha256-FqSI+Nn6SS8wh7twyVxNFQMnRSwaS9Xp/sDEUnkUzq0=",
-        "type": "git",
-        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=ardupilot"
+        "lastModified": 1716448434,
+        "narHash": "sha256-bz9zgsK8z6bEaIP+j80oQnIsTfSkaMpppmugnVVlJlY=",
+        "owner": "GaloisInc",
+        "repo": "flakes",
+        "rev": "bcf6a5f673626c2c3e72ece769668e3b7b6f757e",
+        "type": "github"
       },
       "original": {
         "dir": "ardupilot",
-        "type": "git",
-        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=ardupilot"
+        "owner": "GaloisInc",
+        "repo": "flakes",
+        "type": "github"
       }
     },
     "autocfg-src": {
@@ -964,7 +970,7 @@
         "memchr-src": "memchr-src_2",
         "memoffset-src": "memoffset-src_2",
         "nix-src": "nix-src_2",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_4",
         "num-traits-src": "num-traits-src_2",
         "opaque-debug-src": "opaque-debug-src_2",
         "os_pipe-src": "os_pipe-src_2",
@@ -1030,11 +1036,11 @@
       },
       "locked": {
         "dir": "build-bom",
-        "lastModified": 1716417465,
-        "narHash": "sha256-AKn2fAhpBflsgObyouNWEZ0X8iyo+RBLgeZ5V4ZVZB8=",
+        "lastModified": 1716447646,
+        "narHash": "sha256-zIN5X1KcqCl4MVhP0CGml/wvnrUojxnZyCjigfY+xsc=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "38df28016969f9c3982251bc784575d51552e085",
+        "rev": "37ad8a1e04d9901d95231a507f136a5539197f5b",
         "type": "github"
       },
       "original": {
@@ -1091,7 +1097,7 @@
         "memchr-src": "memchr-src_3",
         "memoffset-src": "memoffset-src_3",
         "nix-src": "nix-src_3",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "num-traits-src": "num-traits-src_3",
         "opaque-debug-src": "opaque-debug-src_3",
         "os_pipe-src": "os_pipe-src_3",
@@ -1157,11 +1163,11 @@
       },
       "locked": {
         "dir": "build-bom",
-        "lastModified": 1716220168,
-        "narHash": "sha256-x90BA0aXgrWl9DXzWQ0lTZ0lKWp49m5Q17F4xAPlXo8=",
+        "lastModified": 1716443283,
+        "narHash": "sha256-crifqaFdvuiur7hKuuronHkZiwU4ewYWrPgE2aunjDo=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "7180a89ce119d314e48f1590efb4dc7356b4bdd5",
+        "rev": "bd7ef3cb76798abfa49e364d786eb56da47e75e8",
         "type": "github"
       },
       "original": {
@@ -2435,7 +2441,10 @@
         "cvc5_src_1_1_0": "cvc5_src_1_1_0_2",
         "cvc5_src_1_1_2": "cvc5_src_1_1_2_2",
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_7",
+        "nixpkgs": [
+          "ardupilot",
+          "nixpkgs"
+        ],
         "nixpkgs_2205": "nixpkgs_2205_2",
         "stp_src_2_2_0": "stp_src_2_2_0_2",
         "stp_src_2_3_1": "stp_src_2_3_1_2",
@@ -2454,11 +2463,11 @@
         "z3_src_4_8_9": "z3_src_4_8_9_2"
       },
       "locked": {
-        "lastModified": 1716417465,
-        "narHash": "sha256-AKn2fAhpBflsgObyouNWEZ0X8iyo+RBLgeZ5V4ZVZB8=",
+        "lastModified": 1716447646,
+        "narHash": "sha256-zIN5X1KcqCl4MVhP0CGml/wvnrUojxnZyCjigfY+xsc=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "38df28016969f9c3982251bc784575d51552e085",
+        "rev": "37ad8a1e04d9901d95231a507f136a5539197f5b",
         "type": "github"
       },
       "original": {
@@ -2859,27 +2868,6 @@
     "levers_5": {
       "inputs": {
         "nixpkgs": [
-          "ardupilot",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1687557470,
-        "narHash": "sha256-T0TAGZPiI5cwWR2OMLVYW7aj3Aco7v8qIVF7JoEgO9Y=",
-        "owner": "kquick",
-        "repo": "nix-levers",
-        "rev": "0e31d80978a9fb6a96df0722aa298d008a57c53e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kquick",
-        "repo": "nix-levers",
-        "type": "github"
-      }
-    },
-    "levers_6": {
-      "inputs": {
-        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -3260,16 +3248,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1603791972,
-        "narHash": "sha256-nj2SvACFH+NERpye1kudcuygCcvnsZYv26M2+wgM5vE=",
+        "lastModified": 1709961763,
+        "narHash": "sha256-6H95HGJHhEZtyYA3rIQpvamMKAGoa8Yh2rFV29QnuGw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cd63096d6d887d689543a0b97743d28995bc9bc3",
+        "rev": "3030f185ba6a4bf4f18b87f345f104e6a6961f34",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "20.09",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -3291,38 +3279,6 @@
       }
     },
     "nixpkgs_6": {
-      "locked": {
-        "lastModified": 1709961763,
-        "narHash": "sha256-6H95HGJHhEZtyYA3rIQpvamMKAGoa8Yh2rFV29QnuGw=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "3030f185ba6a4bf4f18b87f345f104e6a6961f34",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_7": {
-      "locked": {
-        "lastModified": 1701282334,
-        "narHash": "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "057f9aecfb71c4437d2b27d3323df7f93c010b7e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "23.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_8": {
       "locked": {
         "lastModified": 1603791972,
         "narHash": "sha256-nj2SvACFH+NERpye1kudcuygCcvnsZYv26M2+wgM5vE=",
@@ -4097,10 +4053,10 @@
         "CANBUS": "CANBUS",
         "ardupilot": "ardupilot",
         "googletest-src": "googletest-src",
-        "levers": "levers_6",
+        "levers": "levers_5",
         "libcanard-src": "libcanard-src",
         "mavlink-src": "mavlink-src",
-        "nixpkgs": "nixpkgs_8",
+        "nixpkgs": "nixpkgs_6",
         "pymavlink-src": "pymavlink-src",
         "supervolo-patches": "supervolo-patches",
         "supervolo-src": "supervolo-src",
@@ -4680,11 +4636,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-fkL84658phit6mIOUNUQ0eIs+78kLcTpDZlSYqIf5pA=",
-        "path": "/nix/store/d4r8a0w9rgfggkh6ki52bhvrkdyzsqx8-source/supervolo/patches",
+        "path": "/nix/store/48s2rz8yni2im23xggg2knlnydg057n0-source/supervolo/patches",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/d4r8a0w9rgfggkh6ki52bhvrkdyzsqx8-source/supervolo/patches",
+        "path": "/nix/store/48s2rz8yni2im23xggg2knlnydg057n0-source/supervolo/patches",
         "type": "path"
       }
     },

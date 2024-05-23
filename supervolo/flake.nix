@@ -13,6 +13,7 @@
     ardupilot = {
       url = "github:GaloisInc/flakes?dir=ardupilot";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.levers.follows = "levers";
       inputs.ardupilot-src.follows = "supervolo-src";
       inputs.ardupilot-patches.follows = "supervolo-patches";
       # gbenchmark
@@ -52,7 +53,10 @@
       url = "github:ArduPilot/waf/67b3eac";
       flake = false;
     };
-    CANBUS.url = "github:GaloisInc/flakes?dir=uavcan";
+    CANBUS = {
+      url = "github:GaloisInc/flakes?dir=uavcan";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
