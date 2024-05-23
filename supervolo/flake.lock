@@ -2,26 +2,26 @@
   "nodes": {
     "CANBUS": {
       "inputs": {
-        "dronecan_DSDL-src": "dronecan_DSDL-src",
         "galois-flakes": "galois-flakes",
         "levers": "levers_2",
         "nixpkgs": "nixpkgs_4",
-        "pydronecan-src": "pydronecan-src"
+        "pyuavcan-src": "pyuavcan-src",
+        "uavcan-src": "uavcan-src",
+        "uavcan_DSDL-src": "uavcan_DSDL-src"
       },
       "locked": {
-        "dir": "pydronecan",
-        "lastModified": 1716417465,
-        "narHash": "sha256-AKn2fAhpBflsgObyouNWEZ0X8iyo+RBLgeZ5V4ZVZB8=",
-        "owner": "GaloisInc",
-        "repo": "flakes",
-        "rev": "38df28016969f9c3982251bc784575d51552e085",
-        "type": "github"
+        "dir": "uavcan",
+        "dirtyRev": "7180a89ce119d314e48f1590efb4dc7356b4bdd5-dirty",
+        "dirtyShortRev": "7180a89-dirty",
+        "lastModified": 1716220168,
+        "narHash": "sha256-RTqDNChH6yZMN68NW3zvZfHU6XcoV7UBlAdGJMbn5iQ=",
+        "type": "git",
+        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=uavcan"
       },
       "original": {
-        "dir": "pydronecan",
-        "owner": "GaloisInc",
-        "repo": "flakes",
-        "type": "github"
+        "dir": "uavcan",
+        "type": "git",
+        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=uavcan"
       }
     },
     "abc_src_2020_06_22": {
@@ -378,34 +378,56 @@
         "url": "https://crates.io/api/v1/crates/anyhow/1.0.43/download"
       }
     },
-    "ardupilot-patches": {
-      "flake": false,
+    "ardupilot": {
+      "inputs": {
+        "CANBUS": [
+          "CANBUS"
+        ],
+        "ardupilot-patches": [
+          "supervolo-patches"
+        ],
+        "ardupilot-src": [
+          "supervolo-src"
+        ],
+        "build-bom": "build-bom_2",
+        "dronecan_dsdlc-src": "dronecan_dsdlc-src",
+        "empy-src": "empy-src",
+        "galois-flakes": "galois-flakes_2",
+        "googletest-src": [
+          "googletest-src"
+        ],
+        "levers": "levers_5",
+        "libcanard-src": [
+          "libcanard-src"
+        ],
+        "lwip-src": "lwip-src",
+        "mavlink-src": [
+          "mavlink-src"
+        ],
+        "mavproxy-src": "mavproxy-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pymavlink-src": [
+          "pymavlink-src"
+        ],
+        "waf-src": [
+          "waf-src"
+        ]
+      },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-ViiV5YT/g1cHMmBCV8MeRpvAdHIFJaosHuAUVIY0RrQ=",
-        "path": "/nix/store/qm7lgi4nn9m5ln0fy43q7h9nk3jkvc1m-source/ardupilot/patches",
-        "type": "path"
+        "dir": "ardupilot",
+        "dirtyRev": "23be71c0a10168a8c36fa8dbe50a242f99c67a68-dirty",
+        "dirtyShortRev": "23be71c-dirty",
+        "lastModified": 1716417814,
+        "narHash": "sha256-FqSI+Nn6SS8wh7twyVxNFQMnRSwaS9Xp/sDEUnkUzq0=",
+        "type": "git",
+        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=ardupilot"
       },
       "original": {
-        "path": "/nix/store/qm7lgi4nn9m5ln0fy43q7h9nk3jkvc1m-source/ardupilot/patches",
-        "type": "path"
-      }
-    },
-    "ardupilot-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707882423,
-        "narHash": "sha256-JoTJmo3e3UJN/P5JHgpLl4j2mE7q1BMwt4DXsc8hvbQ=",
-        "owner": "ArduPilot",
-        "repo": "ardupilot",
-        "rev": "43adaf3714356c8b7a636148bfca6533365847f3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ArduPilot",
-        "ref": "43adaf3",
-        "repo": "ardupilot",
-        "type": "github"
+        "dir": "ardupilot",
+        "type": "git",
+        "url": "file:///home/kquick/work/galois-flakes-git2023?dir=ardupilot"
       }
     },
     "autocfg-src": {
@@ -2040,23 +2062,6 @@
         "url": "https://crates.io/api/v1/crates/digest/0.9.0/download"
       }
     },
-    "dronecan_DSDL-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1688851155,
-        "narHash": "sha256-I0080lPuI6agkxtpjj8jVBsIKVqpObRRaYUN9rpF15k=",
-        "owner": "DroneCAN",
-        "repo": "DSDL",
-        "rev": "de93d9c8bb76de1b093050e3a31e4d4ce539c577",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DroneCAN",
-        "ref": "de93d9c",
-        "repo": "DSDL",
-        "type": "github"
-      }
-    },
     "dronecan_dsdlc-src": {
       "flake": false,
       "locked": {
@@ -2573,16 +2578,16 @@
     "googletest-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1654991212,
-        "narHash": "sha256-1lrRc44VYpP3PtWIFAzKz6c/wpIU/uqV1k2mWCqwwaA=",
+        "lastModified": 1579642000,
+        "narHash": "sha256-jLFwEH02lHxEQ1pu63zq7U5bTrrK4Ob8dCbq2nwzaOg=",
         "owner": "ArduPilot",
         "repo": "googletest",
-        "rev": "c5fed93f941865a0e912e9baf46ded713506590a",
+        "rev": "10b1902d893ea8cc43c69541d70868f91af3646b",
         "type": "github"
       },
       "original": {
         "owner": "ArduPilot",
-        "ref": "c5fed93",
+        "ref": "10b1902",
         "repo": "googletest",
         "type": "github"
       }
@@ -2809,6 +2814,7 @@
     "levers_3": {
       "inputs": {
         "nixpkgs": [
+          "ardupilot",
           "build-bom",
           "nixpkgs"
         ]
@@ -2830,6 +2836,7 @@
     "levers_4": {
       "inputs": {
         "nixpkgs": [
+          "ardupilot",
           "galois-flakes",
           "build-bom",
           "nixpkgs"
@@ -2850,6 +2857,27 @@
       }
     },
     "levers_5": {
+      "inputs": {
+        "nixpkgs": [
+          "ardupilot",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1687557470,
+        "narHash": "sha256-T0TAGZPiI5cwWR2OMLVYW7aj3Aco7v8qIVF7JoEgO9Y=",
+        "owner": "kquick",
+        "repo": "nix-levers",
+        "rev": "0e31d80978a9fb6a96df0722aa298d008a57c53e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kquick",
+        "repo": "nix-levers",
+        "type": "github"
+      }
+    },
+    "levers_6": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -2908,16 +2936,16 @@
     "libcanard-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1707608163,
-        "narHash": "sha256-eqBeP9QYXF6MwZXydYaJc+4uj60KxFraPOAJwdrETnk=",
+        "lastModified": 1553147211,
+        "narHash": "sha256-y4rz4lB1QI7womUs+90JJrdWs8xgM/eDSY0qhvTkETA=",
         "owner": "DroneCAN",
         "repo": "libcanard",
-        "rev": "0ae477b82bc18daf642383079a02710f69294aa8",
+        "rev": "99163fc2369e5e5f75f8473f0b950b3418830d3f",
         "type": "github"
       },
       "original": {
         "owner": "DroneCAN",
-        "ref": "0ae477b",
+        "ref": "99163fc",
         "repo": "libcanard",
         "type": "github"
       }
@@ -3014,16 +3042,16 @@
     "mavlink-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1702782392,
-        "narHash": "sha256-h1tW9eBxCvncIhPVsXya/m3rJcYJSPCovoS5kNOJDes=",
+        "lastModified": 1611083204,
+        "narHash": "sha256-XMxrDwOXJauwd26le6PalbbDw4u8RCAS0FmlPk0Yfxc=",
         "owner": "ArduPilot",
         "repo": "mavlink",
-        "rev": "130a836efbfef0eb3287a92cd5e187de7facdce2",
+        "rev": "6aeff3515360427735867dfd866d3ed77fbb4c2f",
         "type": "github"
       },
       "original": {
         "owner": "ArduPilot",
-        "ref": "130a836",
+        "ref": "6aeff35",
         "repo": "mavlink",
         "type": "github"
       }
@@ -3232,16 +3260,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1701282334,
-        "narHash": "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=",
+        "lastModified": 1603791972,
+        "narHash": "sha256-nj2SvACFH+NERpye1kudcuygCcvnsZYv26M2+wgM5vE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "057f9aecfb71c4437d2b27d3323df7f93c010b7e",
+        "rev": "cd63096d6d887d689543a0b97743d28995bc9bc3",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "23.11",
+        "ref": "20.09",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -3296,16 +3324,16 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1701282334,
-        "narHash": "sha256-MxCVrXY6v4QmfTwIysjjaX0XUhqBbxTWWB4HXtDYsdk=",
+        "lastModified": 1603791972,
+        "narHash": "sha256-nj2SvACFH+NERpye1kudcuygCcvnsZYv26M2+wgM5vE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "057f9aecfb71c4437d2b27d3323df7f93c010b7e",
+        "rev": "cd63096d6d887d689543a0b97743d28995bc9bc3",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "23.11",
+        "ref": "20.09",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -3598,37 +3626,37 @@
         "url": "https://crates.io/api/v1/crates/proc-macro2/1.0.78/download"
       }
     },
-    "pydronecan-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704596861,
-        "narHash": "sha256-ESZPqg79Tdl9MQMWnbWhXIYa8OxaRRF7LPUIkVDHJHQ=",
-        "owner": "DroneCAN",
-        "repo": "pydronecan",
-        "rev": "1f494e9a56ac9930f1e11c2f453789414b10d54e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DroneCAN",
-        "ref": "1f494e9",
-        "repo": "pydronecan",
-        "type": "github"
-      }
-    },
     "pymavlink-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1702688245,
-        "narHash": "sha256-bkDnWwi/wlXc/ho7S3Lo+lkJlnPEjJfh5EFL0Ib9N6I=",
+        "lastModified": 1577137545,
+        "narHash": "sha256-fxAAUW8tNmSwDevZNPJ8SXO53WRU7QHrTSrLhLca72c=",
         "owner": "ArduPilot",
         "repo": "pymavlink",
-        "rev": "4d8c4ff274d41b9bc8da1a411cb172d39786e46b",
+        "rev": "ef30682ca967a7d0f0689b047ef6309a111753e0",
         "type": "github"
       },
       "original": {
         "owner": "ArduPilot",
-        "ref": "4d8c4ff",
+        "ref": "ef30682",
         "repo": "pymavlink",
+        "type": "github"
+      }
+    },
+    "pyuavcan-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1439903037,
+        "narHash": "sha256-fXctazAaji6nKWVBfmR4BbEKqQEJuj7uj7ih0Dx0kQA=",
+        "owner": "UAVCAN",
+        "repo": "pyuavcan",
+        "rev": "c58477a644d20ccf95a20c151f3a0402f271c3b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UAVCAN",
+        "ref": "c58477a",
+        "repo": "pyuavcan",
         "type": "github"
       }
     },
@@ -4067,20 +4095,15 @@
     "root": {
       "inputs": {
         "CANBUS": "CANBUS",
-        "ardupilot-patches": "ardupilot-patches",
-        "ardupilot-src": "ardupilot-src",
-        "build-bom": "build-bom_2",
-        "dronecan_dsdlc-src": "dronecan_dsdlc-src",
-        "empy-src": "empy-src",
-        "galois-flakes": "galois-flakes_2",
+        "ardupilot": "ardupilot",
         "googletest-src": "googletest-src",
-        "levers": "levers_5",
+        "levers": "levers_6",
         "libcanard-src": "libcanard-src",
-        "lwip-src": "lwip-src",
         "mavlink-src": "mavlink-src",
-        "mavproxy-src": "mavproxy-src",
         "nixpkgs": "nixpkgs_8",
         "pymavlink-src": "pymavlink-src",
+        "supervolo-patches": "supervolo-patches",
+        "supervolo-src": "supervolo-src",
         "waf-src": "waf-src"
       }
     },
@@ -4652,6 +4675,36 @@
         "url": "https://crates.io/api/v1/crates/strsim/0.11.0/download"
       }
     },
+    "supervolo-patches": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-fkL84658phit6mIOUNUQ0eIs+78kLcTpDZlSYqIf5pA=",
+        "path": "/nix/store/d4r8a0w9rgfggkh6ki52bhvrkdyzsqx8-source/supervolo/patches",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/d4r8a0w9rgfggkh6ki52bhvrkdyzsqx8-source/supervolo/patches",
+        "type": "path"
+      }
+    },
+    "supervolo-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689692960,
+        "narHash": "sha256-SzQ3m+emnrOiNVxztZG7Ks0DPwFAmTdGlFhSkg95a3s=",
+        "owner": "RMIShane",
+        "repo": "ardupilot",
+        "rev": "4a3ab2b4846e4d5b65d2558c5ba3830986caf549",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RMIShane",
+        "ref": "SuperVolo_Master",
+        "repo": "ardupilot",
+        "type": "github"
+      }
+    },
     "syn-1_0_74-src": {
       "flake": false,
       "locked": {
@@ -4976,6 +5029,40 @@
         "url": "https://crates.io/api/v1/crates/typenum/1.13.0/download"
       }
     },
+    "uavcan-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1567999746,
+        "narHash": "sha256-RolTn3Qmmb/dgq8uwVYJSi/yeZZDyzoLIJ7DeqDtvdQ=",
+        "owner": "Ardupilot",
+        "repo": "uavcan",
+        "rev": "3ef4b88d96466bbcf886f74d0ae169a4c8c1bdb0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Ardupilot",
+        "ref": "3ef4b88",
+        "repo": "uavcan",
+        "type": "github"
+      }
+    },
+    "uavcan_DSDL-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1527951094,
+        "narHash": "sha256-fKcA/6YZaZqVVcm6JFlfvE6+2Kuuhtb+PiYAJoOzeKM=",
+        "owner": "UAVCAN",
+        "repo": "dsdl",
+        "rev": "192295c4f9b67f4a20b0eabf74757b6597415f2b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UAVCAN",
+        "ref": "192295c",
+        "repo": "dsdl",
+        "type": "github"
+      }
+    },
     "unicode-ident-src": {
       "flake": false,
       "locked": {
@@ -5123,16 +5210,16 @@
     "waf-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1682918230,
-        "narHash": "sha256-5s7/WFFwcalSxBrUuaz+hpo05/jVjzfsDNOXWJC6F3I=",
+        "lastModified": 1580282172,
+        "narHash": "sha256-3TJslQQJPQh5Zpt6u8a2zECT/Wc4JFMae4SHXQlbSbI=",
         "owner": "ArduPilot",
         "repo": "waf",
-        "rev": "1b1625b8e7da6e1307d73335cb995fa8813d5950",
+        "rev": "67b3eac550520cd8a7cd1dce0f77820e91fb8ad0",
         "type": "github"
       },
       "original": {
         "owner": "ArduPilot",
-        "ref": "1b1625b",
+        "ref": "67b3eac",
         "repo": "waf",
         "type": "github"
       }

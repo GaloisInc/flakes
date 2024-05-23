@@ -52,7 +52,7 @@
             flake = false;
         };
         CANBUS = {
-          url = "/home/kquick/work/galois-flakes-git2023/pydronecan";
+          url = "github:GaloisInc/flakes?dir=pydronecan";
         };
     };
 
@@ -116,41 +116,44 @@
                 # extra-buildInputs = [ pkgs.pkgsCross.gnu32.cmake ];
                 build-bom = build-bom.packages.${system}.build-bom;
                 # Use older clang/llvm because newer has import problems
-                clang = pkgs.clang_12;
-                llvm = pkgs.llvm_12;
+                clang = if isSuperVolo then pkgs.clang_9 else pkgs.clang_12;
+                llvm = if isSuperVolo then pkgs.llvm_9 else pkgs.clang_12;
               };
+            isSuperVolo = builtins.hasAttr "uavcan" CANBUS.packages.${system};
+            # SuperVolo uses uavcan instead of pydronecan. Also, SuperVolo is
+            # older and needs python2 packages.
+            python = if isSuperVolo then pkgs.python2 else pkgs.python3;
+            pythonpkgs = if isSuperVolo then pkgs.python2Packages else pkgs.python3Packages;
         in {
           default = self.packages.${system}.sitl_bc;
 
-          empy = pkgs.python3Packages.buildPythonPackage rec {
+          empy = pythonpkgs.buildPythonPackage rec {
               name = "empy";
               src = empy-src;
               doCheck = false;
               pythonImportsCheck = [ "em" ];
               format = "setuptools";
           };
-          mavproxy = pkgs.python3Packages.buildPythonPackage rec {
+          mavproxy = pythonpkgs.buildPythonPackage rec {
               name = "mavproxy";
               src = mavproxy-src;
-              propagatedBuildInputs =
-                let pp = pkgs.python3Packages; in [
-                      self.packages.${system}.pymavlink
-                      pp.pyserial
-                      pp.numpy
-                    ];
+              propagatedBuildInputs = [
+                self.packages.${system}.pymavlink
+                pythonpkgs.pyserial
+                pythonpkgs.numpy
+              ];
               doCheck = false;
               pythonImportsCheck = [ "MAVProxy" ];
               format = "setuptools";
           };
 
-          pymavlink = pkgs.python3Packages.buildPythonPackage rec {
+          pymavlink = pythonpkgs.buildPythonPackage rec {
               name = "pymavlink";
               src = pymavlink-src;
-              propagatedBuildInputs =
-                let pp = pkgs.python3Packages; in [
-                      pp.future
-                      pp.lxml
-                    ];
+              propagatedBuildInputs = [
+                pythonpkgs.future
+                pythonpkgs.lxml
+              ];
               doCheck = false;
               pythonImportsCheck = [ "pymavlink" ];
               format = "setuptools";
@@ -221,27 +224,36 @@
               version = "1.0";
               src = ardupilot-src;
               buildInputs = [
-                  pkgs.gcc
-                  pkgs.wafHook
+                pkgs.gcc
+                (if isSuperVolo
+                 then pkgs.wafHook.override {
+                   waf = pkgs.waf.override { python = python; };
+                 }
+                 else pkgs.wafHook)
+                (python.withPackages (pp: [
                   self.packages.${system}.pymavlink
-              ] ++ (with pkgs.python3Packages; [
                   self.packages.${system}.empy
-                  pexpect
-                  setuptools
+                  pp.pexpect
+                  pp.setuptools
                   self.packages.${system}.dronecan
-              ]);
+                ]))
+              ];
+              nativeBuildInputs = [ python ]; # KWQ
               wafConfigureFlags = waf_flags;
               wafBuildTargets = tgts;
               wafBuildFlags = waf_flags;
               wafInstallTargets = tgts;
-              # n.b. the waf configuration does not seem to want to install into
-              # --prefix, --destdir, or --out, so it's done manually in the
-              # postInstall hook here.
+              # n.b. the later Ardupilot waf configuration does not seem to want
+              # to install into --prefix, --destdir, or --out, so it's done
+              # manually in the postInstall hook here.  The install is handed as
+              # expected for the older SuperVolo build.
               wafInstallFlags = waf_flags;
-              postInstall = ''
-                mkdir $out/bin
-                cp build/sitl/bin/* $out/bin/
-              '';
+              postInstall =
+                if isSuperVolo then ""
+                else ''
+                  mkdir $out/bin
+                  cp build/sitl/bin/* $out/bin/
+                  '';
               # Pre-configure fixes: the ardupilot waf requires that a number of
               # the submodules be actually present.  Use flake inputs to supplant
               # the use of git submodules.
