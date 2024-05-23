@@ -170,6 +170,7 @@ let
     src = updDrv.src;
     buildPhase = "echo nothing to do in wrapper for build phase";
     installPhase = gen_bc_out updDrv.out;
+    nativeBuildInputs = [ llvm bintools gnutar ];
     outputs = [ "out" "bc" ];
   };
 
