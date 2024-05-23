@@ -5,7 +5,10 @@
             url = "github:kquick/nix-levers";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        galois-flakes.url = "github:GaloisInc/flakes";
+        galois-flakes = {
+          url = "github:GaloisInc/flakes";
+          inputs.nixpkgs.follows = "nixpkgs";
+        };
         build-bom.url = "github:GaloisInc/flakes?dir=build-bom";
         ardupilot-src = {
           url = "github:ArduPilot/ardupilot/43adaf3"; # master version; versions for following inputs mirror git submodule settings
@@ -53,6 +56,7 @@
         };
         CANBUS = {
           url = "github:GaloisInc/flakes?dir=pydronecan";
+          inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
@@ -117,7 +121,7 @@
                 build-bom = build-bom.packages.${system}.build-bom;
                 # Use older clang/llvm because newer has import problems
                 clang = if isSuperVolo then pkgs.clang_9 else pkgs.clang_12;
-                llvm = if isSuperVolo then pkgs.llvm_9 else pkgs.clang_12;
+                llvm = if isSuperVolo then pkgs.llvm_9 else pkgs.llvm_12;
               };
             isSuperVolo = builtins.hasAttr "uavcan" CANBUS.packages.${system};
             # SuperVolo uses uavcan instead of pydronecan. Also, SuperVolo is
