@@ -146,7 +146,7 @@ let
       cp -r ${forTgts}/* $out/
 
       if [ -r ${binutils}/nix-support/orig-bintools ] ; then
-        objcopy_bin=$(cat ${binutils}/nix-support/orig-bintools)
+        objcopy_bin=$(cat ${binutils}/nix-support/orig-bintools)/bin/objcopy
       else
         objcopy_bin=${binutils}/bin/objcopy
       fi
