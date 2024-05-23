@@ -169,6 +169,7 @@ let
 
       if [ "X$out" != "X" ] ; then extract_bc $out; fi
       if [ "X$bin" != "X" ] ; then extract_bc $bin; fi
+      cp -r $bc $out
   '';
 
   wrapDrv = pkgs.stdenv.mkDerivation {
