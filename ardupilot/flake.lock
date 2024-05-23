@@ -254,11 +254,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-ViiV5YT/g1cHMmBCV8MeRpvAdHIFJaosHuAUVIY0RrQ=",
-        "path": "/nix/store/wdy1vak6vn7p2a1ycfv08dg5ywz8jx1y-source/ardupilot/patches",
+        "path": "/nix/store/qkccq1gkrfl9z2acjx5n6ndc6177hj5g-source/ardupilot/patches",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wdy1vak6vn7p2a1ycfv08dg5ywz8jx1y-source/ardupilot/patches",
+        "path": "/nix/store/qkccq1gkrfl9z2acjx5n6ndc6177hj5g-source/ardupilot/patches",
         "type": "path"
       }
     },
@@ -566,11 +566,11 @@
       },
       "locked": {
         "dir": "build-bom",
-        "lastModified": 1716447271,
-        "narHash": "sha256-gj3yl+xWgUh9lg5g0SdoPs4JPrRrZ6h4nn7Jg43XZpA=",
+        "lastModified": 1716447646,
+        "narHash": "sha256-zIN5X1KcqCl4MVhP0CGml/wvnrUojxnZyCjigfY+xsc=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "d344180e82f43a34385c3be24cd3042addc6ecfc",
+        "rev": "37ad8a1e04d9901d95231a507f136a5539197f5b",
         "type": "github"
       },
       "original": {
@@ -1527,11 +1527,11 @@
         "z3_src_4_8_9": "z3_src_4_8_9"
       },
       "locked": {
-        "lastModified": 1716447271,
-        "narHash": "sha256-gj3yl+xWgUh9lg5g0SdoPs4JPrRrZ6h4nn7Jg43XZpA=",
+        "lastModified": 1716447646,
+        "narHash": "sha256-zIN5X1KcqCl4MVhP0CGml/wvnrUojxnZyCjigfY+xsc=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "d344180e82f43a34385c3be24cd3042addc6ecfc",
+        "rev": "37ad8a1e04d9901d95231a507f136a5539197f5b",
         "type": "github"
       },
       "original": {
