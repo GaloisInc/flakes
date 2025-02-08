@@ -123,15 +123,16 @@
     "build-bom-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1711171166,
-        "narHash": "sha256-OXpAin5PjdxS/yJUQzeW+4/EJz58NHhVhRw9KBNWsDw=",
-        "owner": "travitch",
+        "lastModified": 1739033863,
+        "narHash": "sha256-nq20u8vi1tfxjWA9tgGuaQOq/Hxvwfg/56DfGHvh3ug=",
+        "owner": "kquick",
         "repo": "build-bom",
-        "rev": "33e4fd313e1a1bc17f72bceca019359825638676",
+        "rev": "5d3b50236ab5f098354d8d4ef068135fbd8c47e0",
         "type": "github"
       },
       "original": {
-        "owner": "travitch",
+        "owner": "kquick",
+        "ref": "galois202502",
         "repo": "build-bom",
         "type": "github"
       }

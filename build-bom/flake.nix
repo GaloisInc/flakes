@@ -9,7 +9,8 @@
           inputs.nixpkgs.follows = "nixpkgs";
       };
       build-bom-src = {
-        url = "github:travitch/build-bom";
+        # url = "github:travitch/build-bom";
+        url = "github:kquick/build-bom/galois202502";
         flake = false;
       };
       aho-corasick-src = {
