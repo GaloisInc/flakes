@@ -386,11 +386,11 @@
       },
       "locked": {
         "dir": "build-bom",
-        "lastModified": 1716443283,
-        "narHash": "sha256-crifqaFdvuiur7hKuuronHkZiwU4ewYWrPgE2aunjDo=",
+        "lastModified": 1739034423,
+        "narHash": "sha256-o6bQk7tfSR/3PrBK3cD27rJtUVdkkBX+YDJGk4XzTf8=",
         "owner": "GaloisInc",
         "repo": "flakes",
-        "rev": "bd7ef3cb76798abfa49e364d786eb56da47e75e8",
+        "rev": "d0a15406790c6665afa86a1ab8111586c99162f6",
         "type": "github"
       },
       "original": {
@@ -403,15 +403,16 @@
     "build-bom-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1711171166,
-        "narHash": "sha256-OXpAin5PjdxS/yJUQzeW+4/EJz58NHhVhRw9KBNWsDw=",
-        "owner": "travitch",
+        "lastModified": 1739033863,
+        "narHash": "sha256-nq20u8vi1tfxjWA9tgGuaQOq/Hxvwfg/56DfGHvh3ug=",
+        "owner": "kquick",
         "repo": "build-bom",
-        "rev": "33e4fd313e1a1bc17f72bceca019359825638676",
+        "rev": "5d3b50236ab5f098354d8d4ef068135fbd8c47e0",
         "type": "github"
       },
       "original": {
-        "owner": "travitch",
+        "owner": "kquick",
+        "ref": "galois202502",
         "repo": "build-bom",
         "type": "github"
       }
