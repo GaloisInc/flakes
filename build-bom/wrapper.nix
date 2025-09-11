@@ -39,10 +39,10 @@ let
   bld = oldAttrs:
     let usingWaf =
           let hasWaf = e: builtins.hasAttr "waf" e;
-          in builtins.any hasWaf (oldAttrs.buildInputs)
-             || builtins.any hasWaf (oldAttrs.propagatedBuildInputs)
-             || builtins.elem pkgs.wafHook oldAttrs.buildInputs
-             || builtins.elem pkgs.wafHook oldAttrs.propagatedBuildInputs;
+          in builtins.any hasWaf (oldAttrs.buildInputs or [])
+             || builtins.any hasWaf (oldAttrs.propagatedBuildInputs or [])
+             || builtins.elem pkgs.wafHook (oldAttrs.buildInputs or [])
+             || builtins.elem pkgs.wafHook (oldAttrs.propagatedBuildInputs or []);
     in
     if usingWaf
     then
