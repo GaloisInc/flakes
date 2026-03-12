@@ -479,12 +479,16 @@
                           '';
                         installPhase = ''
                               runHook preInstall
+
+                              echo installing binaries
                               mkdir -p $out/bin
                               for X in X $(${pkgs.findutils}/bin/find target -maxdepth 2 -executable -type f); do
                                 if [ "X$X" != "XX" ]; then
                                   cp $X $out/bin/$(basename $X)
                                 fi
                               done
+
+                              echo installing docs
                               mkdir $doc
                               cp -r target/doc/* $doc/
                               runHook postInstall
