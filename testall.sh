@@ -1,7 +1,7 @@
 for v in 4_8_8 4_8_9 4_8_10 4_8_11 4_8_12 4_8_13 4_8_14 ; do
     nix build .#z3.v$v;
 done;
-for v in 2_5 2_6 2_6_2 ; do
+for v in 2_5 2_6 2_6_2 2_7_0 ; do
     nix build .#yices.v$v;
 done;
 for v in 2_2 2_3 2_3_1 2_3_2 ; do

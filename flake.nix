@@ -14,8 +14,11 @@
   inputs = {
 
     nixpkgs_2205.url = "github:nixos/nixpkgs/22.05";
-    # nixpkgs circa 22.05 is sufficient to build z3, yices, boolector (check
-    # disabled), cvc4, cvc5, and stp, but not bitwuzla_0_3_0.
+    nixpkgs_2505.url = "github:nixos/nixpkgs/25.05";
+    # nixpkgs circa 22.05 is sufficient to build z3, yices (pre-2.7.0),
+    # boolector (check disabled), cvc4, cvc5, and stp, but not bitwuzla_0_3_0.
+
+    # nixpkgs circa 25.05 is sufficient build yices (2.7.0 or later).
 
     # nixpkgs circa 23.05 or later is needed for bitwuzla_0_3_0 (specifically for
     # meson >= 0.64), but 23.05 or later fails for:
@@ -159,6 +162,10 @@
       url = "github:SRI-CSL/yices2/Yices-2.6.4";
       flake = false;
     };
+    yices_src_2_7_0 = {
+      url = "github:SRI-CSL/yices2/yices-2.7.0";
+      flake = false;
+    };
     z3_src_4_8_8 = {
       url = "github:z3prover/z3/z3-4.8.8";
       flake = false;
@@ -197,6 +204,7 @@
     inps.flake-utils.lib.eachDefaultSystem (system:
       let pkgs = inps.nixpkgs.legacyPackages.${system};
           pkgs22 = inps.nixpkgs_2205.legacyPackages.${system};
+          pkgs25 = inps.nixpkgs_2505.legacyPackages.${system};
           cleanVer = builtins.replaceStrings ["."] ["_"];
           # The mkVerPkg will build the package as specified by the *current*
           # pkgs specification (imported from nixpkgs), but adjusting the src and
@@ -214,6 +222,11 @@
             });
           mkVerPkg22 = pkg: version:
             pkgs22.${pkg}.overrideAttrs  (_: {
+              inherit version;
+              src = inps."${pkg + "_src_" + cleanVer version}";
+            });
+          mkVerPkg25 = pkg: version:
+            pkgs25.${pkg}.overrideAttrs  (_: {
               inherit version;
               src = inps."${pkg + "_src_" + cleanVer version}";
             });
@@ -247,6 +260,7 @@
           mk22CVC5 = mkVerPkg22 "cvc5";
           mkYices = mkVerPkg "yices";
           mk22Yices = mkVerPkg22 "yices";
+          mk25Yices = mkVerPkg25 "yices";
           mkZ3 = mkVerPkg "z3";
           mkSTP = mkVerPkg "stp";
       in
@@ -263,8 +277,10 @@
             v4_13_0 = mkZ3 "4.13.0";
           };
           yices = pkgs.yices // rec { # whatever the nixpkgs current version is...
+            v2_7   = v2_7_0;
             v2_6   = v2_6_4;
             v2_5   = v2_5_4;
+            v2_7_0 = mk25Yices "2.7.0";
             v2_6_4 = mkYices "2.6.4";
             v2_6_2 = mkYices "2.6.2";
             v2_5_4 = mk22Yices "2.5.4";
