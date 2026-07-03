@@ -542,6 +542,19 @@
         "url": "https://crates.io/api/v1/crates/cloudabi/0.0.3/download"
       }
     },
+    "cocoalib-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648225889,
+        "narHash": "sha256-HKphJKSYXXyYlrP8ZfEs5rXmB7K4DYD0qJo8nLQvuyQ=",
+        "type": "tarball",
+        "url": "https://cocoa.altervista.org/cocoalib/tgz/CoCoALib-0.99800.tgz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cocoa.altervista.org/cocoalib/tgz/CoCoALib-0.99800.tgz"
+      }
+    },
     "colorchoice-src": {
       "flake": false,
       "locked": {
@@ -1379,6 +1392,7 @@
         "boolector_src_3_2_2": "boolector_src_3_2_2",
         "boolector_src_3_2_3": "boolector_src_3_2_3",
         "build-bom": "build-bom",
+        "cocoalib-src": "cocoalib-src",
         "cvc4_src_1_7": "cvc4_src_1_7",
         "cvc4_src_1_8": "cvc4_src_1_8",
         "cvc5_src_1_0_0": "cvc5_src_1_0_0",
