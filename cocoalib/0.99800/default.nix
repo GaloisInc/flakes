@@ -53,12 +53,9 @@ stdenv.mkDerivation rec {
     done
   '';
 
-  configurePhase = ''
-    runHook preConfigure
+  preConfigure = ''
     mkdir -p $out/include
     mkdir -p $out/lib
-    ./configure --prefix=$out --with-libgmp=${gmp-static.out}/lib/libgmp.a
-    runHook postConfigure
   '';
 
   meta = {
