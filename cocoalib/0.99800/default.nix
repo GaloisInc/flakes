@@ -9,9 +9,6 @@
   which,
 }:
 
-let
-  gmp-static = gmp.override { withStatic = true; };
-in
 stdenv.mkDerivation rec {
   name = "cocoalib";
   version = "0.99800";
@@ -29,7 +26,7 @@ stdenv.mkDerivation rec {
     ./CoCoALib-0.99800-trace.patch
   ];
 
-  buildInputs = [ gmp-static ];
+  buildInputs = [ gmp ];
 
   nativeBuildInputs = [
     pkg-config
