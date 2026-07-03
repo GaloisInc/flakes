@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
   version = "0.99800";
 
   src = fetchurl {
-    url = "https://github.com/cvc5/cvc5-deps/blob/main/CoCoALib-0.99800.tgz";
+    url = "https://cocoa.altervista.org/cocoalib/tgz/CoCoALib-0.99800.tgz";
     hash = "sha256-+Lsifi4XKeFxz3rCAIr3HfJZFGB3EsNdt7y1oESpKMY=";
   };
 
