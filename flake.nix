@@ -84,6 +84,10 @@
     build-bom = {
       url = "github:GaloisInc/flakes?dir=build-bom";
     };
+    cocoalib-src = {
+      url = "https://cocoa.altervista.org/cocoalib/tgz/CoCoALib-0.99800.tgz";
+      flake = false;
+    };
     cvc4_src_1_8 = {
       url = "github:cvc4/cvc4/1.8";
       flake = false;
@@ -230,6 +234,10 @@
               inherit version;
               src = inps."${pkg + "_src_" + cleanVer version}";
             });
+          cocoalib = (pkgs.callPackage "${self}/cocoalib/0.99800" {}).overrideAttrs (_: {
+            src = inps.cocoalib-src;
+            version = "0.99800";
+          });
           mkABC = version:
             pkgs.abc-verifier.overrideAttrs (_: {
               name = "abc";
@@ -256,7 +264,12 @@
               # configureFlags = old.configureFlags ++ [ "--symfpu" ];
               cmakeFlags = (old.cmakeFlags or []) ++ [ "-DUSE_SYMFPU=ON" ];
             });
-          mkCVC5 = mkVerPkg "cvc5";
+          mkCVC5 = version:
+            let basePkg = mkVerPkg "cvc5" version;
+            in basePkg.overrideAttrs (old: {
+              buildInputs = old.buildInputs ++ [ cocoalib ];
+              cmakeFlags = (old.cmakeFlags or []) ++ [ "-DUSE_COCOA=ON" "-DENABLE_GPL=ON" ];
+            });
           mk22CVC5 = mkVerPkg22 "cvc5";
           mkYices = mkVerPkg "yices";
           mk22Yices = mkVerPkg22 "yices";
